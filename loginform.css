@@ -2,12 +2,51 @@
   box-sizing: border-box;
 }
 
-.form-container {
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 1% auto;
+  border: none;
   width: 33%;
-  border: 2px solid dodgerblue;
-  transform: translate(100%);
   border-radius: 10px;
-  margin-top: 80px;
+}
+
+.close {
+  color: #000;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.form {
+  transform: translate(10%);
+}
+.form-container {
+  width: 100%;
+  border: 1px solid dodgerblue;
+  border-radius: 10px;
+  margin-top: 1% auto;
+  background: #7f7fd5;
+  background: -webkit-linear-gradient(to bottom, #91eae4, #86a8e7, #7f7fd5);
+  background: linear-gradient(to bottom, #91eae4, #86a8e7, #7f7fd5);
 }
 form {
   transform: translate(10%);
@@ -28,7 +67,6 @@ form {
   margin-top: 20px;
 }*/
 
-/* Style the input container */
 .input-container {
   display: flex;
   width: 300px;
@@ -37,7 +75,6 @@ form {
   margin-left: 10px;
 }
 
-/* Style the form icons */
 .icon {
   padding: 8px;
   background: dodgerblue;
@@ -46,7 +83,6 @@ form {
   text-align: center;
 }
 
-/* Style the input fields */
 .input-field {
   width: 100%;
   padding: 8px;
@@ -59,22 +95,29 @@ form {
 
 .show-pswd {
   margin: 10px;
+  color: black;
+  display: flex;
 }
 
-/* Set a style for the submit button */
+.show-pswd .checkbox-text {
+  padding-top: 3px;
+  padding-left: 3px;
+}
+
 .btn {
-  background-color: dodgerblue;
+  background-color: #33cc00;
   color: white;
   padding: 12px 20px;
   border: none;
   cursor: pointer;
   width: 300px;
-  opacity: 0.8;
+  opacity: 1;
   margin: 10px;
   margin-top: 0px;
   border-radius: 5px;
   font-family: 'Times New Roman', Times, serif;
   font-size: 14px;
+  font-weight: 500;
   text-transform: uppercase;
 }
 
@@ -82,8 +125,9 @@ form {
   opacity: 1;
 }
 
-.form {
-  transform: translate(10%);
+input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
 }
 
 .heading {

@@ -23,65 +23,76 @@
     ></script>-->
   </head>
   <body>
-    <div class="form-container">
-      <form action="">
-        <div class="heading">LOGIN HERE</div>
-        <!--<img src="" alt="" srcset="" class="avatar-img" />-->
-        <div class="input-container">
-          <i class="fa fa-user icon"></i>
-          <input
-            class="input-field"
-            type="text"
-            placeholder="Enter Username"
-            name="usrnm"
-            id="username"
-          />
-        </div>
+    <button id="myBtn">Login</button>
 
-        <div class="input-container">
-          <i class="fa fa-key icon"></i>
-          <input
-            class="input-field"
-            type="password"
-            placeholder="Enter Password"
-            name="psw"
-            autocomplete="on"
-            id="password"
-          />
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="form-container">
+          <form action="">
+            <div class="heading">LOGIN HERE</div>
+            <!--<img src="" alt="" srcset="" class="avatar-img" />-->
+            <div class="input-container">
+              <i class="fa fa-user icon"></i>
+              <input
+                class="input-field"
+                type="text"
+                placeholder="Enter Username"
+                name="usrnm"
+                id="username"
+              />
+            </div>
+
+            <div class="input-container">
+              <i class="fa fa-key icon"></i>
+              <input
+                class="input-field"
+                type="password"
+                placeholder="Enter Password"
+                name="psw"
+                autocomplete="on"
+                id="password"
+              />
+            </div>
+            <div class="show-pswd">
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  name="remember"
+                  onclick="showPassword()"
+                />
+              </div>
+              <div class="checkbox-text">Show Password</div>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div
+              style="width: 300px; height: 20px; border-bottom: 1px solid #f3f1a9; text-align: center; margin-left: 10px; margin-top: 10px"
+              class="Or-options"
+            >
+              <span
+                style="font-size: 12px; background-color: #f3f1a9; padding: 10px 10px"
+              >
+                OR
+              </span>
+            </div>
+            <div class="login-options">
+              <div class="g-signin2" data-onsuccess="onSignIn"></div>
+              <div class="facebook">
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="facebook-bg">Sign in</a>
+              </div>
+            </div>
+            <!--<div
+              class="fb-login-button"
+              data-width="150px"
+              data-size="large"
+              data-button-type="login_with"
+              data-auto-logout-link="true"
+              data-use-continue-as="true"
+            ></div>-->
+          </form>
         </div>
-        <div class="show-pswd">
-          <label>
-            <input type="checkbox" name="remember" onclick="showPassword()" />
-            Show Password
-          </label>
-        </div>
-        <button type="submit" class="btn">Login</button>
-        <div
-          style="width: 300px; height: 20px; border-bottom: 1px solid #f3f1a9; text-align: center; margin-left: 10px; margin-top: 10px"
-          class="Or-options"
-        >
-          <span
-            style="font-size: 12px; background-color: #f3f1a9; padding: 10px 10px"
-          >
-            OR
-          </span>
-        </div>
-        <div class="login-options">
-          <div class="g-signin2" data-onsuccess="onSignIn"></div>
-          <div class="facebook">
-            <a href="#" class="fa fa-facebook"></a>
-            <a href="#" class="facebook-bg">Sign in</a>
-          </div>
-        </div>
-        <!--<div
-          class="fb-login-button"
-          data-width="150px"
-          data-size="large"
-          data-button-type="login_with"
-          data-auto-logout-link="true"
-          data-use-continue-as="true"
-        ></div>-->
-      </form>
+      </div>
     </div>
     <script src="loginform.js"></script>
   </body>
