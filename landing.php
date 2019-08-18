@@ -138,6 +138,11 @@
                             	<option value="F">Female</option>
                             </select>
                         </div>
+                          <div class="col-md-4"><br>
+                            <label>Birthday</label>
+                             <input type="date" name="bday" required>
+                        </div>
+                       
                         <div class="col-md-9"><br>
                         	
                         <!--     <label>Address</label><br> -->
@@ -149,16 +154,17 @@
                             Pincode: <input type="text" class="form-control" placeholder="Pincode" name="pincode" required>
                             <!-- textarea class="form-control" rows="9" placeholder="Address" name="address" required></textarea> -->
                         </div>
-                        <!-- <div class="col-md-4 col-md-offset-4">
+                        <div class="col-md-4 col-md-offset-4">
                             <label></label>
-                            <button type="button" data-toggle="modal" data-target="#alertModal" class="btn btn-primary btn-block btn-lg">Send itititi</button>
-                        </div> -->
-                    
+                            <input type="submit" class="btn btn-primary btn-lg center-block" name="Submit">
+                            <!-- <button type="submit" class="btn btn-primary btn-lg center-block" data-dismiss="modal" aria-hidden="true" onclick="">Submit</button> -->
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
   		<br/>     		
-        		<button class="btn btn-primary btn-lg center-block" data-dismiss="modal" aria-hidden="true">Submit </button></form>
+        		
         	</div>
         </div>
         </div>
@@ -188,13 +194,17 @@
                             <label>Password</label>
                             <input type="Password" class="form-control" placeholder="Password">
                         </div>
-                       
+                       <div class="col-md-4 col-md-offset-4">
+                            <label></label>
+                            <input type="submit" class="btn btn-primary btn-lg center-block" name="Submit">
+                            <!-- <button type="submit" class="btn btn-primary btn-lg center-block" data-dismiss="modal" aria-hidden="true" onclick="">Submit</button> -->
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
   		<br/>     		
-        		<button class="btn btn-primary btn-lg center-block" data-dismiss="modal" aria-hidden="true">Submit </button>
+        		<!-- <button class="btn btn-primary btn-lg center-block" data-dismiss="modal" aria-hidden="true">Submit </button> -->
         	</div>
         </div>
         </div>
