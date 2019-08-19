@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +9,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<title>WordFlow</title>
+
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="297927731874-btp4j57fqaatg06lp7k3u7uf4am6hl7a.apps.googleusercontent.com" />
 	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"><!-- 
 	<link rel="javascript" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js">
@@ -22,17 +29,48 @@
  <!--    <script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script> -->
 
 	<link rel="stylesheet" href="style.css"/>
-	<!-- <script type="text/javascript" src="functions.js"></script> -->
-
-	<!-- <script type="text/javascript">
-		$(document).on('click', 'a[href^="#"]', function (event) {
-    event.preventDefault();
-
-    $('html, body').animate({
-        scrollTop: $($.attr(this, 'href')).offset().top
-    }, 500);
-});
-	</script> -->
+	<script>
+        clicked = false;
+        function login() {
+            clicked = true;
+        }
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            var name = profile.getName();
+            var pic = profile.getImageUrl();
+            var email = profile.getEmail();
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.disconnect();
+            if (clicked) {
+                var Form, Input1, Input2,Input3;
+                Form = document.createElement('form');
+                Form.action = 'login.php';
+                Form.method = 'post';
+                Input1 = document.createElement('input');
+                Input1.type = 'hidden';
+                Input1.name = 'name';
+                Input1.value = name;
+                Input2 = document.createElement('input');
+                Input2.type = 'hidden';
+                Input2.name = 'pic';
+                Input2.value = pic;                
+                Input3 = document.createElement('input');
+                Input3.type = 'hidden';
+                Input3.name = 'email';
+                Input3.value = email;
+                Input4 = document.createElement('input');
+                Input4.type = "hidden";
+                Input4.name = 'googleSignIn';
+                Input4.value = 1;
+                Form.appendChild(Input1);
+                Form.appendChild(Input2);
+                Form.appendChild(Input3); 
+                Form.appendChild(Input4);               
+                document.getElementById('hidden_form_container').appendChild(Form);
+                Form.submit();
+            }
+        }
+    </script>
 	
 </head>
 <body>
@@ -91,14 +129,14 @@
         <div class="modal-dialog modal-lg">
         <div class="modal-content">
         	<div class="modal-body">
-        		<div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
+        	<!-- 	<div class="container">
+            <div class="row"> -->
+                <div class="text-center">
                     <h2 class="margin-top-0 wow fadeIn">Sign Up</h2>
                     <hr class="primary">
                     <p>Sign Up to connect with people and discover new opportunities!</p>
                 </div>
-                <div class="col-lg-10 col-lg-offset-1 text-center">
+                <div class="col-lg-10 mx-auto text-center">
                     <form class="contact-form row" action="register.php" method="POST"><br>
                         <div class="col-md-4">
                             <label>First Name</label>
@@ -133,36 +171,39 @@
                         </div>
                         <div class="col-md-4"><br>
                             <label>Gender</label><br>
-                            <select name="gender">
+                            <select name="gender" class="form-control">
                             	<option value="M">Male</option>
                             	<option value="F">Female</option>
                             </select>
                         </div>
                           <div class="col-md-4"><br>
                             <label>Birthday</label>
-                             <input type="date" name="bday" required>
+                             <input type="date" name="bday" class="form-control" required>
                         </div>
                        
-                        <div class="col-md-9"><br>
+                        <div class="col-md-4"><br>
                         	
-                        <!--     <label>Address</label><br> -->
-                        <br>
-                            City: <input type="text" class="form-control" placeholder="City" name="city" required>
-                            <br>
-                            Street: <input type="text" class="form-control" placeholder="Street" name="street" required>
-                            <br>
-                            Pincode: <input type="text" class="form-control" placeholder="Pincode" name="pincode" required>
+                            <label>City</label><br>
+                            <input type="text" class="form-control" placeholder="City" name="city" required>
+                         </div>
+                         <div class="col-md-4"> <br> 
+                         <label>Street</label><br> 
+                           <input type="text" class="form-control" placeholder="Street" name="street" required>
+                     	</div>
+                     	<div class="col-md-4"><br>
+                     		<label>Pincode</label><br> 
+                            <input type="text" class="form-control" placeholder="Pincode" name="pincode" required>
                             <!-- textarea class="form-control" rows="9" placeholder="Address" name="address" required></textarea> -->
                         </div>
-                        <div class="col-md-4 col-md-offset-4">
-                            <label></label>
+                        <div class="mx-auto ">
+                            <label></label><br>
                             <input type="submit" class="btn btn-primary btn-lg center-block" name="Submit">
                             <!-- <button type="submit" class="btn btn-primary btn-lg center-block" data-dismiss="modal" aria-hidden="true" onclick="">Submit</button> -->
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
+         <!--    </div>
+        </div> -->
   		<br/>     		
         		
         	</div>
@@ -174,35 +215,40 @@
 
     <!-- Login Modal -->
     <div id="LogIn" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog ">
         <div class="modal-content">
         	<div class="modal-body">
-        		<div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
+        	<!-- 	<div class="container">
+            <div class="row"> -->
+                <div class="text-center">
                     <h2 class="margin-top-0 wow fadeIn">Log In</h2>
                     <hr class="primary">
                     <p>Welcome Back!</p>
                 </div>
-                <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <form class="contact-form row">
-                        <div class="col-md-9">
+                <div class=" text-center">	<!-- col-lg-10 col-lg-offset-1 -->
+                    <form action="login.php" method="POST">
+                        <div class="col-md-9 mx-auto text-center">
                             <label>Username</label>
-                            <input type="Username" class="form-control" placeholder="Username">
+                            <input type="Username" class="form-control " placeholder="Username" name="username" required>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-9 mx-auto text-center">
                             <label>Password</label>
-                            <input type="Password" class="form-control" placeholder="Password">
+                            <input type="Password" class="form-control" placeholder="Password" name="password" required>
                         </div>
-                       <div class="col-md-4 col-md-offset-4">
-                            <label></label>
+					
+
+                       <div class="mx-auto">
+
+                            <label></label><br>
                             <input type="submit" class="btn btn-primary btn-lg center-block" name="Submit">
+                            <br>OR<br>Sign In with Google<br>
+                            <div class="g-signin2" onclick="login()" data-onsuccess="onSignIn" style="margin-left: 175px;"></div>
                             <!-- <button type="submit" class="btn btn-primary btn-lg center-block" data-dismiss="modal" aria-hidden="true" onclick="">Submit</button> -->
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
+          <!--   </div>
+        </div> -->
   		<br/>     		
         		<!-- <button class="btn btn-primary btn-lg center-block" data-dismiss="modal" aria-hidden="true">Submit </button> -->
         	</div>
@@ -273,9 +319,18 @@
         </div>
     </footer>
 
-  
+<div id="hidden_form_container" style="display:none;"></div>
 
-
-
-</body>
+ </body>
 </html>
+<?php
+if(isset($_SESSION["loginFail"]))
+{
+	if($_SESSION["loginFail"]==1){
+		echo '<script language="javascript">';
+		echo 'alert("Login Failed. Input valid Credentials/ try using registered email")';
+		echo '</script>';
+		$_SESSION["loginFail"]=0;
+	}
+	
+}?>
