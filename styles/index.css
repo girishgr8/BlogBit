@@ -16,11 +16,6 @@ body {
     webkit-tap-highlight-color: #222;
 }
 
-/* Twitter */
-.fa-twitter {
-  background: #55ACEE;
-  color: white;
-}
 
 hr {
   -webkit-box-sizing: content-box;

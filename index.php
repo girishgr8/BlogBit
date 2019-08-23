@@ -143,7 +143,7 @@ session_start();
                         </div>
                         <div class="col-md-4">
                             <label>Middle Name</label>
-                            <input type="text" class="form-control" placeholder="Middle Name" name="middlename" required>
+                            <input type="text" class="form-control" placeholder="Middle Name" name="middlename" >
                         </div>
                         <div class="col-md-4">
                             <label>Last Name</label>
@@ -166,7 +166,7 @@ session_start();
                         </div>
                         <div class="col-md-4"><br>
                             <label>Phone</label>
-                            <input type="text" class="form-control" placeholder="Phone" name="phone" required>
+                            <input type="tel" class="form-control" placeholder="Phone" name="phone"  pattern="[0-9]{10}" required>
                         </div>
                         <div class="col-md-4"><br>
                             <label>Gender</label><br>
