@@ -3,7 +3,7 @@
 //Specify Credentials
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "1234";
 $dbname = "wordflow";
 $port = 3306;
 

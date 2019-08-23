@@ -119,7 +119,6 @@ session_start();
             scrollTop: ($($ele.attr('href')).offset().top - 60)
         }, 1450, 'easeInOutExpo');
         event.preventDefault();
-        console.log('Executed.')
     });
         
     </script>
@@ -151,11 +150,11 @@ session_start();
                             <input type="text" class="form-control" placeholder="Last Name" name="lastname" required>
                         </div>
                         <br>
-                        <div class="col-md-4"><br>                      
+                        <div class="col-md-6"><br>                      
                             <label>Username</label>
                             <input type="Username" class="form-control" placeholder="Username" name="username" required>
                         </div>
-                        <div class="col-md-4"><br>
+                        <div class="col-md-6"><br>
                             <label>Password</label>
                             <input type="Password" class="form-control" placeholder="Password" name="password" required>
                         </div>
@@ -163,7 +162,7 @@ session_start();
                         <br>
                         <div class="col-md-12"><br>
                             <label>Email</label>
-                            <input type="text" class="form-control" placeholder="Email" name="email" required>
+                            <input type="email" class="form-control" placeholder="Email" name="email" required>
                         </div>
                         <div class="col-md-4"><br>
                             <label>Phone</label>
@@ -180,7 +179,10 @@ session_start();
                             <label>Birthday</label>
                              <input type="date" name="bday" class="form-control" required>
                         </div>
-                       
+                       <div class="col-md-4"><br>
+                            <label>Country</label><br> 
+                            <input type="text" class="form-control" placeholder="Country" name="country" required>
+                        </div>
                         <div class="col-md-4"><br>
                             
                             <label>City</label><br>
@@ -190,12 +192,13 @@ session_start();
                          <label>Street</label><br> 
                            <input type="text" class="form-control" placeholder="Street" name="street" required>
                         </div>
-                        <div class="col-md-4"><br>
+                        <div class="col-md-4 mx-auto"><br>
                             <label>Pincode</label><br> 
                             <input type="text" class="form-control" placeholder="Pincode" name="pincode" required>
                             <!-- textarea class="form-control" rows="9" placeholder="Address" name="address" required></textarea> -->
                         </div>
-                        <div class="mx-auto ">
+                        
+                        <div class="mx-auto col-md-9 ">
                             <label></label><br>
                             <input type="submit" class="btn btn-primary btn-lg center-block" name="Submit">
                             <!-- <button type="submit" class="btn btn-primary btn-lg center-block" data-dismiss="modal" aria-hidden="true" onclick="">Submit</button> -->
