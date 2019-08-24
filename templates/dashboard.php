@@ -36,17 +36,17 @@ session_start();
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="./styles/dashboard.css"/>
+  <link rel="stylesheet" href="../styles/dashboard.css"/>
 </head>
 <body>
 
-<nav class="navbar navbar-inverse ">
+<nav class="navbar navbar-default navbar-inverse navbar-expand-lg fixed-top ">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">WordFlow</a>
+      <a class="navbar-brand" href="#"><span class="brand">WordFlow</span></a>
     </div>
-    <div class="nav navbar-nav navbar-form navbar-expand-lg fixed-top ">
-    <form action="" method="GET" class="form-inline "> 
+    <div class="nav navbar-nav navbar-form">
+    <form action="" method="GET" class="form-inline"> 
       <div class="row">
         <div class="col-md-40">
           <div class="input-group">
@@ -55,16 +55,23 @@ session_start();
                 <span class="glyphicon glyphicon-search"></span>
               </button>
             </div>
-            <input type="text" class="form-control " placeholder="Search WordFlow" id="searchbox"/>
+            <input type="text" class="form-control" placeholder="Search WordFlow" id="searchbox"/>
           </div>
         </div>
       </div>
     </form>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
-      <li><a href="#"><span class="glyphicon glyphicon glyphicon-text-background"></span></a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+      <li><a href="#" class="nav-item nav-link" title="Home"><img src="../images/home.svg" class="icons invert"></a></li>
+      <li><a href="#" class="nav-item nav-link" title="Message"><img src="../images/msg.svg" class="icons invert"></a></li>
+      <li><a href="#" class="nav-item nav-link" title="Saved Posts"><img src="../images/saved.svg" class="icons invert"></a></li>
+      <li><a href="#" class="nav-item nav-link" title="Saved Posts"><img src="../images/save2.svg" class="icons invert"></a></li>
+      <li><a href="#" class="nav-item nav-link" title="Liked Posts"><img src="../images/heart.svg" class="icons invert"></a></li>
+      <li><a href="#" class="nav-item nav-link" title="Your Profile"><img src="../images/user.svg" class="icons invert"></a></li>
+      <button class="btn navbar-btn item writebtn3" title="Create"> &nbsp;<img src="../images/pencil.svg" class="icons">&nbsp;</button>
+      <button class="btn navbar-btn item writebtn" title="Create"> &nbsp;<img src="../images/edit.svg" class="icons">&nbsp;</button>
+      <button class="btn navbar-btn item writebtn2" title="Create"> &nbsp;<img src="../images/edit2.svg" class="icons">&nbsp;</button> <!-- edit and edit2-->
+      <!-- <li><a href="#" class="nav-item nav-link"><span class="glyphicon glyphicon-user"></span></a></li> --> 
     </ul>
   </div>
 </nav>
