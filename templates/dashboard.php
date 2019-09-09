@@ -61,8 +61,7 @@ session_start();
       </div>
     </form>
     </div>
-    <ul class="nav navbar-nav navbar-right">    	
-      <li><a href="blogEditor.php"><span class="glyphicon glyphicon-edit"></span></a></li>
+    <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
       <li><a href="#"><span class="glyphicon glyphicon glyphicon-text-background"></span></a></li>
       <li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
