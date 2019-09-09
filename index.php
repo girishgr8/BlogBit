@@ -106,7 +106,7 @@ session_start();
                 </ul>
                 <ul class="nav navbar-right">
                     <li>
-                        <a class="page-scroll"  title="A free Bootstrap video landing theme" href="#about">About</a>
+                        <a class="page-scroll"  title="About WordFlow" href="#about">About</a>
                     </li>
                 </ul>
             </div>
