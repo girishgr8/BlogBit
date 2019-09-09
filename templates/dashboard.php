@@ -64,13 +64,13 @@ session_start();
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#" class="nav-item nav-link" title="Home"><img src="../images/home.svg" class="icons invert"></a></li>
       <li><a href="#" class="nav-item nav-link" title="Message"><img src="../images/msg.svg" class="icons invert"></a></li>
-      <li><a href="#" class="nav-item nav-link" title="Saved Posts"><img src="../images/saved.svg" class="icons invert"></a></li>
+      
       <li><a href="#" class="nav-item nav-link" title="Saved Posts"><img src="../images/save2.svg" class="icons invert"></a></li>
       <li><a href="#" class="nav-item nav-link" title="Liked Posts"><img src="../images/heart.svg" class="icons invert"></a></li>
       <li><a href="#" class="nav-item nav-link" title="Your Profile"><img src="../images/user.svg" class="icons invert"></a></li>
       <button class="btn navbar-btn item writebtn3" title="Create"> &nbsp;<img src="../images/pencil.svg" class="icons">&nbsp;</button>
-      <button class="btn navbar-btn item writebtn" title="Create"> &nbsp;<img src="../images/edit.svg" class="icons">&nbsp;</button>
-      <button class="btn navbar-btn item writebtn2" title="Create"> &nbsp;<img src="../images/edit2.svg" class="icons">&nbsp;</button> <!-- edit and edit2-->
+      
+       <!-- edit and edit2-->
       <!-- <li><a href="#" class="nav-item nav-link"><span class="glyphicon glyphicon-user"></span></a></li> --> 
     </ul>
   </div>
