@@ -55,7 +55,7 @@ session_start();
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-inverse navbar-expand-lg fixed-top ">
+<nav class="navbar navbar-default  navbar-expand-lg fixed-top ">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#"><span class="brand">WordFlow</span></a>
@@ -67,7 +67,7 @@ session_start();
           <div class="input-group">
             <div class="input-group-btn">
               <button class="btn searchbtn" type="submit">
-                <span class="glyphicon glyphicon-search"></span>
+                <span class="glyphicon glyphicon-search invert"></span>
               </button>
             </div>
             <input type="text" class="form-control" placeholder="Search WordFlow" id="searchbox"/>
