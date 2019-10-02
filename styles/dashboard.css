@@ -15,7 +15,9 @@ body {
 	position: fixed;
 	z-index: 100;
 	width: 100%;
+	border : none !important;
 	border-radius: 0px !important;
+	background-color: #00233d;
 }
 
 .navbar + .container {
@@ -28,7 +30,7 @@ body {
 
 body {
     font-family: 'Helvetica Neue', sans-serif;
-    background-color: #282828;
+    background-color: #001935;
 
 }
 
@@ -172,6 +174,14 @@ body {
 	margin-left: 10px !important;
 }
 
+.searchbtn{
+	background-color: #004059;
+	border-color: #004059;
+	border-radius: 1px !important;
+}
+
+
+
 .invert{
 	/*-webkit-filter: invert(1);
    filter: invert(1);*/
@@ -184,8 +194,10 @@ body {
 }
 
 input#searchbox {
-    background-color: white;
-    color:white;
+    background-color: #485665;
+    border-radius: 1px !important;
+    border-color: #485665;
+    color: #ffffff;
 }
 
 
