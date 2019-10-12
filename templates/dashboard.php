@@ -81,8 +81,24 @@ session_start();
       <li><a href="#" class="nav-item nav-link" title="Message"><img src="../images/msg.svg" class="icons invert"></a></li>
       
       <li><a href="#" class="nav-item nav-link" title="Saved Posts"><img src="../images/save2.svg" class="icons invert"></a></li>
-      <li><a href="#" class="nav-item nav-link" title="Liked Posts"><img src="../images/heart.svg" class="icons invert"></a></li>
-      <li><a href="#" class="nav-item nav-link" title="Your Profile"><img src="../images/user.svg" class="icons invert"></a></li>
+      <!-- <li><a href="#" class="nav-item nav-link" title="Liked Posts"><img src="../images/heart.svg" class="icons invert"></a></li> -->
+
+
+      <li><a href="#" class="nav-item nav-link " data-toggle="dropdown" data-target=".userdrop" title="Your Profile"><img src="../images/user.svg" class="icons invert"></a>
+      <div class="dropdown userdrop">
+      <ul class="dropdown-menu">
+      <li class="dropdown-header">Account</li>
+      <li><a href="#">Log Out</a></li>
+      <li><a href="#">Settings</a></li>
+      <li><a href="#">Help</a></li>
+      <li class="divider"></li>
+      <li class="dropdown-header">WordFlow</li>
+      <li><a href="#">Posts</a></li>
+      <li><a href="#">Likes</a></li>
+      <li><a href="#">Edit appearance</a></li>
+    </ul>
+
+      </div></li>
       <button class="btn navbar-btn item writebtn3" title="Create"> &nbsp;<img src="../images/pencil.svg" class="icons">&nbsp;</button>
       
        <!-- edit and edit2-->
@@ -133,6 +149,31 @@ session_start();
   </div>
 
   <div class="post" id="p2">
+    <img src="../images/avatar2.jpg" class="card-user" alt="..." style="width:100%">
+  <div class="card">
+    <div class="card-header">
+      <span>bubblegumpinkcakeeeeee</span>&nbsp; &nbsp;
+      <img src="../images/follow.svg" class="icons" title="follow" style="margin-bottom: 3px;">
+    </div>
+    <div class="card-image">
+      <img src="../images/cardimg.jpg" alt="." style="width:100%">
+      <button class="card-btn btn"><img src="../images/rightarrow.svg" class="view-icon"></button>
+    </div>
+    <div class="card-body">
+      <h1 class="card-title">Benefits of Studying</h1>
+      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+    <div class="card-header">
+      <span style="font-weight: bold;" class="text-muted">124 likes</span>
+      <img src="../images/share.svg" class="icons" style="position: absolute; right:100px;" title="Share" >
+      <img src="../images/blogging.svg" class="icons" style="position: absolute; right:60px;" title="Comment" >
+    <img src="../images/like.svg" class="icons" id="like" style="position: absolute; right:18px;" onclick="liked(this)" title="Like" >
+    </div>
+  </div>
+  </div>
+
+  <div class="post" id="p3">
   	<img src="../images/avatar1.jpg" class="card-user" alt="..." style="width:100%">
 	<div class="card">
 		<div class="card-header">

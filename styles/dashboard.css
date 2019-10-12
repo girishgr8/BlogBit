@@ -36,11 +36,12 @@ body {
 
 .container{	
 	display: inline-flex;
+	width: 100%;
 }
 
 .posts{
-	width: 60%;
-	margin-left: auto;
+	width: 50%;
+	margin-left: 20vh;
 }
 
 .recommendations{
