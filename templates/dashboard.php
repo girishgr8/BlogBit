@@ -91,7 +91,7 @@ session_start();
       <li><a href="./meet.php" class="nav-item nav-link" title="Meet a friend"><img src="../images/map.svg" class="icons invert"></a></li>
       <!-- <li><a href="#" class="nav-item nav-link" title="Liked Posts"><img src="../images/heart.svg" class="icons invert"></a></li> -->
 
-
+      <li><a href="./meetup.php" class="nav-item nav-link" title="Meetup"><img src="../images/map2.svg" class="icons invert"></a></li>
       <li><a href="#" class="nav-item nav-link " data-toggle="dropdown" data-target=".userdrop" title="Your Profile"><img src="../images/user.svg" class="icons invert"></a>
       <div class="dropdown userdrop">
       <ul class="dropdown-menu">
@@ -107,7 +107,7 @@ session_start();
     </ul>
 
       </div></li>
-      <button class="btn navbar-btn item writebtn3" title="Create"> &nbsp;<img src="../images/pencil.svg" class="icons">&nbsp;</button>
+      <button class="btn navbar-btn item writebtn3" title="Create" onclick="openEditor()"> &nbsp;<img src="../images/pencil.svg" class="icons">&nbsp;</button>
       
        <!-- edit and edit2-->
       <!-- <li><a href="#" class="nav-item nav-link"><span class="glyphicon glyphicon-user"></span></a></li> --> 
@@ -226,4 +226,11 @@ session_start();
 <!-- endcontainer -->
 
 </body>
+
+<script type="text/javascript">
+  function openEditor(){
+    window.location.href="./blogEditor.php";
+  }
+</script>
+
 </html>
