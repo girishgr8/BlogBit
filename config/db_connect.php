@@ -9,7 +9,6 @@ $port = 3306;
 
 // Create connection
 $conn = new mysqli($servername, $username, $password,$dbname,$port);
-$path = "C:/Users/Gayatri/Desktop/Blogs/";
 
 
 ?>
