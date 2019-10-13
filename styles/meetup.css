@@ -1,0 +1,152 @@
+body{
+    background-color:#57d3386e; 
+}
+a {
+    text-decoration: none !important;
+}
+.mapouter{
+    position:relative;
+    text-align:right;
+    height:630px;
+    width:900px;
+}
+.gmap_canvas {
+    overflow:hidden;
+    background:none!important;
+    height:630px;
+    width:900px;
+}
+.mapouter1{
+    position:relative;
+    text-align:right;
+    height:630px;
+    width:900px;
+}
+.gmap_canvas1 {
+    overflow:hidden;
+    background:none!important;
+    height:630px;
+    width:900px;
+}
+#wrapperRoute, #wrapperMidway, #wrapperCurrentLocation {
+    margin-top:10px;
+    width:1320px;
+    clear:both;
+  }
+#wrapperMidway, #wrapperRoute{
+    display: none;
+  }
+
+  #currentMap{    
+    width:900px;
+    float:left;
+    margin-top: 20px;
+  }
+
+  #userDetails{
+    width:400px;
+    float:left;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+#routeMap {  
+    width:900px;
+    float:left;
+    margin-top: 20px;
+  }
+#midwayMap {  
+    width:900px;
+    float:left;
+    margin-top: 20px;
+    
+  }
+  #midwayInfo {
+    width: 400px;
+    float:left;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  #routeInfo {
+    width: 400px;
+    float:left;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+
+    
+  
+  h1 {
+    color: white;  
+    font-size: 35px;
+    font-weight: 800;
+  }
+  h2{
+    color: white;  
+    font-size: 25px;
+    font-weight: 500;
+  }
+  
+  .flex-container {
+    width :100%;
+    height: 630px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .content-container {
+    width: 100%;
+    height: 630px;
+  }
+  
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    width: 100%;
+    height: 630px;
+    border-radius: 12px;
+    flex-direction: column;
+    background: #1f1f1f;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
+  }
+  
+  .subtitle {
+    font-size: 25px;  
+    color: rgba(177, 177, 177, 0.3);
+  }
+  
+  input {
+    border: 0;
+    border-bottom: solid rgb(143, 143, 143) 1px;
+    font-size: 20px;
+    margin-bottom: 30px;  
+    background: none;
+    color: rgba(255, 255, 255, 0.555);  
+    height: 20px;
+    width: 300px;
+  }
+  
+  .submit-btn {
+    cursor: pointer;  
+    border: none;
+    border-radius: 8px;  
+    box-shadow: 2px 2px 7px #57d3386e;  
+    background: #57d3386e;
+    color: rgba(255, 255, 255, 0.8);  
+    width: 250px;
+    padding: 15px;
+    transition: all 1s;
+    font-size: 25px;
+  }
+  
+  .submit-btn:hover {
+    color: rgb(255, 255, 255);  
+    box-shadow: none;
+  }
+  
+  .form{
+      width:400px;
+      height: 630px;
+  }
+
