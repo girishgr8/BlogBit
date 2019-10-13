@@ -13,15 +13,22 @@ session_start();
     <!--Including Editor API-->
     <script src="../config/editorAPI/tinymce.min.js"></script>
     <script>
+         window.onload = gapi.load('auth2', function() {
+  auth2 = gapi.auth2.init({
+      client_id: '431755900850-hj63duh4igs0cmhig2tke2t6h0c0gk0g.apps.googleusercontent.com',
+      scope: 'profile'
+  });
+});
         /*logout of both Google and normal session*/
         function logout() {
-            var r = confirm("Sure about Logout?");
+            var r = confirm("Do you wish to logout?");
             if (r == true) {
                  var auth2 = gapi.auth2.getAuthInstance();
                  auth2.signOut().then(function () {
                     document.location.href = '../db/logout.php';
                  });
             auth2.disconnect();
+            document.location.href = '../db/logout.php';
             }
         }
         /*initialising auth instance*/
@@ -77,10 +84,11 @@ session_start();
     </form>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#" class="nav-item nav-link" title="Home"><img src="../images/home.svg" class="icons highlight-icon"></a></li>
+      <li><a href="./dashboard.php" class="nav-item nav-link" title="Home"><img src="../images/home.svg" class="icons highlight-icon"></a></li>
       <li><a href="#" class="nav-item nav-link" title="Message"><img src="../images/msg.svg" class="icons invert"></a></li>
       
       <li><a href="#" class="nav-item nav-link" title="Saved Posts"><img src="../images/save2.svg" class="icons invert"></a></li>
+      <li><a href="./meet.php" class="nav-item nav-link" title="Meet a friend"><img src="../images/map.svg" class="icons invert"></a></li>
       <!-- <li><a href="#" class="nav-item nav-link" title="Liked Posts"><img src="../images/heart.svg" class="icons invert"></a></li> -->
 
 
@@ -88,8 +96,8 @@ session_start();
       <div class="dropdown userdrop">
       <ul class="dropdown-menu">
       <li class="dropdown-header">Account</li>
-      <li><a href="#">Log Out</a></li>
-      <li><a href="#">Settings</a></li>
+      <li><a href="#" onclick="logout()">Log Out</a></li>
+      <li><a href="./settings.php">Settings</a></li>
       <li><a href="#">Help</a></li>
       <li class="divider"></li>
       <li class="dropdown-header">WordFlow</li>
@@ -106,6 +114,7 @@ session_start();
     </ul>
   </div>
 </nav>
+<!------------------------------------------------------------------------------------------------------------------------------------------------>
 
 <div class="container">
  <!--  <h2>jehrjweh</h2>
