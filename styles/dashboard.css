@@ -6,8 +6,8 @@
 
 html,
 body {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .map{
@@ -25,10 +25,7 @@ input{
 	text-align: center;
 }
 
-.meet-info hr{
-	border: 2px solid #001935;
-  /*border-radius: 5px;*/
-}
+
 
 .text {
   border: 0;
@@ -43,9 +40,10 @@ input{
 	position: fixed;
 	z-index: 100;
 	width: 100%;
+  top: 0;
 	border : none !important;
 	border-radius: 0px !important;
-	background-color: #00233d;
+	background-color: #022012 ;
 }
 
 .navbar + .container {
@@ -57,8 +55,8 @@ input{
 }
 
 body {
-    font-family: 'Helvetica Neue', sans-serif;
-    background-color: #001935;
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #03311C ;
 
 }
 
@@ -126,14 +124,14 @@ input[readonly]{
 
 .edit:hover{
 	filter: 
-    invert(1.0);
+  invert(1.0);
 }
 
 .card-btn {
   position: absolute;
   bottom: -30px;
   right: 16px;
-  background-color: #02baeb;
+  background-color: #2CBE4E;
   border-radius: 100%;
 
   border: none;
@@ -192,53 +190,55 @@ input[readonly]{
 
 /*h1,h2,h3,h4,h5,h6,p{
 	color:white;
-}*/
+  }*/
 
-.icons {
-	width: 22px;
-	height: 22px;
-}
+  .icons {
+   width: 22px;
+   height: 22px;
+ }
 
-.view-icon{
-	width: 30px;
-	height: 30px;
-	filter: 
-    invert(1.0);
-}
-
-.highlight-icon{
-	filter: 
-    invert(1.0);
-}
-
-.writebtn{
-	background-color: #FF5733 ;
-	margin-left: 10px !important;
-}
-
-.writebtn2{
-	background-color: #C70039 ;
-	margin-left: 10px !important;
-}
-
-.writebtn3{
-	background-color: #02baeb ;
-	margin-left: 10px !important;
-}
-
-.searchbtn{
-	background-color: #004059;
-	border-color: #004059;
-	border-radius: 1px !important;
-}
-
-
-
-.invert{
-	/*-webkit-filter: invert(1);
-   filter: invert(1);*/
+ .view-icon{
+   width: 30px;
+   height: 30px;
    filter: 
-    invert(0.7);
+   invert(1.0);
+ }
+
+ .highlight-icon{
+   filter: 
+   invert(1.0);
+ }
+
+ .writebtn3{
+   background-color: #2CBE4E ;
+   margin-left: 10px !important;
+ }
+
+ .greenify{
+  background-color: #2CBE4E;
+  border: none !important;
+  color: white;
+ }
+
+ .greenify:hover{
+  background-color: #064f1a;
+  border: none !important;
+  color: white;
+ }
+
+ .searchbtn{
+   background-color: #224032 ;
+   border-color: #224032 ;
+   border-radius: 1px !important;
+ }
+
+
+
+ .invert{
+	/*-webkit-filter: invert(1);
+ filter: invert(1);*/
+ filter: 
+ invert(0.7);
 }
 
 .invert:hover{
@@ -246,10 +246,10 @@ input[readonly]{
 }
 
 input#searchbox {
-    background-color: #485665;
-    border-radius: 1px !important;
-    border-color: #485665;
-    color: #ffffff;
+  background-color: #3E6352 ;
+  border-radius: 1px !important;
+  border-color: #3E6352 ;
+  color: white;
 }
 
 
@@ -264,20 +264,152 @@ input#searchbox {
 }
 
 .cardi{
-				
-				border-radius: 0.2rem;
-				text-align: center;
-				color: white;
-			}
+
+  border-radius: 0.2rem;
+  text-align: center;
+  color: white;
+}
 
 .mat_list{
-				list-style-type: none;
-				/*display:block;*/
-				float: left;
-			}
-			.mat_list>li{
-				font-family: 'Helvetica Neue', sans-serif;
-				font-size: 1em;
-				font-weight: bold;
-				margin: none !important;
-			}
+  list-style-type: none;
+  /*display:block;*/
+  float: left;
+}
+.mat_list>li{
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  margin: none !important;
+}
+
+
+
+
+/*
+	MEETUP CSS
+  */
+
+  .mapouter{
+    position:relative;
+    text-align:right;
+    height:630px;
+    width:900px;
+  }
+  .gmap_canvas {
+    overflow:hidden;
+    background:none!important;
+    height:630px;
+    width:900px;
+  }
+  .mapouter1{
+    position:relative;
+    text-align:right;
+    height:630px;
+    width:900px;
+  }
+  .gmap_canvas1 {
+    overflow:hidden;
+    background:none!important;
+    height:630px;
+    width:900px;
+  }
+  #wrapperRoute, #wrapperMidway, #wrapperCurrentLocation {
+    margin-top:10px;
+    width:1320px;
+    clear:both;
+  }
+  #wrapperMidway, #wrapperRoute{
+    display: none;
+  }
+
+  #currentMap{    
+    width:900px;
+    float:left;
+    margin-top: 20px;
+  }
+
+  #userDetails{
+    width:400px;
+    float:left;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  #routeMap {  
+    width:900px;
+    float:left;
+    margin-top: 20px;
+  }
+  #midwayMap {  
+    width:900px;
+    float:left;
+    margin-top: 20px;
+    
+  }
+  #midwayInfo {
+    width: 400px;
+    float:left;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  #routeInfo {
+    width: 400px;
+    float:left;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+
+  .flex-container {
+    width :100%;
+    height: 630px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .content-container {
+    width: 100%;
+    height: 630px;
+  }
+  
+  .form-container {
+    color: white;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;  
+    width: 100%;
+    height: 630px;
+    border-radius: 12px;
+    flex-direction: column;
+    background: #1f1f1f;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
+  }
+
+  .xc hr{
+    border: 3px solid #03311C ;
+  }
+  
+ /* .subtitle {
+    font-size: 25px;  
+    color: rgba(177, 177, 177, 0.3);
+  }
+  
+  .submit-btn {
+    cursor: pointer;  
+    border: none;
+    border-radius: 8px;  
+    box-shadow: 2px 2px 7px #57d3386e;  
+    background: #57d3386e;
+    color: rgba(255, 255, 255, 0.8);  
+    width: 250px;
+    padding: 15px;
+    transition: all 1s;
+    font-size: 25px;
+  }
+  
+  .submit-btn:hover {
+    color: rgb(255, 255, 255);  
+    box-shadow: none;
+  }
+  */
+
