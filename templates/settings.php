@@ -13,19 +13,15 @@ session_start();
     <!--Including Editor API-->
     <script src="../config/editorAPI/tinymce.min.js"></script>
     <script>
-            window.onload = gapi.load('auth2', function() {
-  auth2 = gapi.auth2.init({
-      client_id: '431755900850-hj63duh4igs0cmhig2tke2t6h0c0gk0g.apps.googleusercontent.com',
-      scope: 'profile'
-  });
-});
+      function openEditor(){
+    window.location.href="./blogEditor.php";
+  }
         /*logout of both Google and normal session*/
         function logout() {
             var r = confirm("Do you wish to logout?");
             if (r == true) {
                  var auth2 = gapi.auth2.getAuthInstance();
                  auth2.signOut().then(function () {
-                  console.log("tried to logout");
                     document.location.href = '../db/logout.php';
                  });
             auth2.disconnect();
@@ -98,6 +94,7 @@ session_start();
       <ul class="dropdown-menu">
       <li class="dropdown-header">Account</li>
       <li><a href="#" onclick="logout()">Log Out</a></li>
+      <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
       <li><a href="#">Settings</a></li>
       <li><a href="#">Help</a></li>
       <li class="divider"></li>
@@ -108,7 +105,7 @@ session_start();
     </ul>
 
       </div></li>
-      <button class="btn navbar-btn item writebtn3" title="Create"> &nbsp;<img src="../images/pencil.svg" class="icons">&nbsp;</button>
+      <button class="btn navbar-btn item writebtn3" title="Create" onclick="openEditor()"> &nbsp;<img src="../images/pencil.svg" class="icons">&nbsp;</button>
       
        <!-- edit and edit2-->
       <!-- <li><a href="#" class="nav-item nav-link"><span class="glyphicon glyphicon-user"></span></a></li> --> 

@@ -15,6 +15,10 @@ include ('../config/db_connect.php');
   <!--Including Editor API-->
   <script src="../config/editorAPI/tinymce.min.js"></script>
   <script>
+
+    function openEditor(){
+    window.location.href="./blogEditor.php";
+  }
     /*logout of both Google and normal session*/
     function logout() {
       var r = confirm("Do you wish to logout?");
@@ -105,7 +109,7 @@ include ('../config/db_connect.php');
             </ul>
 
           </div></li>
-          <button class="btn navbar-btn item writebtn3" title="Create"> &nbsp;<img src="../images/pencil.svg" class="icons">&nbsp;</button>
+          <button class="btn navbar-btn item writebtn3" title="Create" onclick="openEditor()"> &nbsp;<img src="../images/pencil.svg" class="icons">&nbsp;</button>
 
           <!-- edit and edit2-->
           <!-- <li><a href="#" class="nav-item nav-link"><span class="glyphicon glyphicon-user"></span></a></li> --> 
@@ -117,11 +121,11 @@ include ('../config/db_connect.php');
 
   <datalist id="userLocations">
     <?php
-    $sql="SELECT firstname,city,`state` from user";
+    $sql="SELECT username,city,`state` from user";
     $res=$conn->query($sql);
     while($r=$res->fetch_assoc()):
       ?>
-      <option data-value=<?= $r["city"].",".$r["state"] ?>><?php echo $r["firstname"]." - ".$r['city'].",".$r["state"] ?></option>
+      <option data-value=<?= $r["city"].",".$r["state"] ?>><?php echo $r["username"] ?></option>
     <?php endwhile; ?>
 
   </datalist>
@@ -152,7 +156,7 @@ include ('../config/db_connect.php');
               </div>
               <div class="col-md-9 col-lg-offset-1"><br>                      
                 <h4>I wanna meet</h4><br>
-                <input type="text" class="col-md-12 text" list="userLocations" style="font-size: 20px;" id="user2" >
+                <input type="text" class="col-md-12 text" style="font-size: 20px;" id="user2" >
               </div>
               <br><br>
               <a onclick="route()"  href="#wrapperRoute" class="btn greenify " style=" font-size: 1.5em; width: 40%; margin-top: 20px;">Explore Route</a>
@@ -176,23 +180,7 @@ include ('../config/db_connect.php');
 
 
 
-            <!-- <div class="xc">
-              <h2 >Meet in Middle</h2>
-              <hr >
-              <p><i>Connect with people across the globe, meet in the middle.</i></p>
-
-
-              <div class="col-md-9 col-lg-offset-1"><br>                      
-                <h4>Your favourable location</h4><br>
-                <input type="text" class="col-md-12 text" id="user1" style="font-size: 20px;" required>
-              </div>
-              <div class="col-md-9 col-lg-offset-1"><br>                      
-                <h4>I wanna meet</h4><br>
-                <input type="text" class="col-md-12 text" list="userLocations" style="font-size: 20px;" id="user2" required>
-              </div>
-              <br><br>
-              <a onclick="route()"  href="#wrapperRoute" class="btn greenify " style=" font-size: 1.5em; width: 40%; margin-top: 20px;">Explore Route</a>
-            </div> -->
+            
 
 
 
@@ -404,13 +392,19 @@ function route(){
   src = document.getElementById("user1").value;
   destTemp = document.getElementById("user2").value;
   var  options = document.querySelectorAll('#userLocations option');
+  var flag = 0;
   for(var i = 0; i < options.length; i++) {
     var option = options[i];
 
     if(option.innerText === destTemp) {
       dest = option.getAttribute('data-value');
+      flag=1;
       break;
     }
+  }
+  if(flag==0){
+    alert('Invalid username.');
+    return;
   }
   alert(src+" "+dest);
   getSrc(src);

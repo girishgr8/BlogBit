@@ -131,7 +131,7 @@ input[readonly]{
   position: absolute;
   bottom: -30px;
   right: 16px;
-  background-color: #02baeb;
+  background-color: #2CBE4E;
   border-radius: 100%;
 
   border: none;
@@ -389,7 +389,7 @@ input#searchbox {
     border: 3px solid #03311C ;
   }
   
-  .subtitle {
+ /* .subtitle {
     font-size: 25px;  
     color: rgba(177, 177, 177, 0.3);
   }
@@ -411,5 +411,5 @@ input#searchbox {
     color: rgb(255, 255, 255);  
     box-shadow: none;
   }
-  
+  */
 
