@@ -1,6 +1,25 @@
 
 <?php
 session_start();
+include ('../config/db_connect.php');
+
+$images=[];
+$disclaimers=[];
+$titles=[];
+$postIDS=[];
+$usernames=[];
+
+$sql="SELECT username,title,disclaimer from blog";
+$res=$conn->query($sql);
+while($r=$res->fetch_assoc()){
+  $images[]=$r['username'].'_'.$r['title'].'.png';
+  $disclaimers[]=$r['disclaimer'];
+  $titles[]=$r['title'];
+  $postIDS[]=$r['username'].'_'.$r['title'];  
+  $usernames[]=$r['username'];   
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,8 +29,18 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <meta name="google-signin-client_id" content="431755900850-hj63duh4igs0cmhig2tke2t6h0c0gk0g.apps.googleusercontent.com" />
+  <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <!--Including Editor API-->
   <script src="../config/editorAPI/tinymce.min.js"></script>
+  
+  <script> 
+    function openBlog(postID){
+     
+      
+      window.location.href="./blogViewer.php?path="+postID;
+    }
+   
+  </script>
   <script>
     /*logout of both Google and normal session*/
     function logout() {
@@ -29,7 +58,7 @@ session_start();
    function onLoad() {
     gapi.load('auth2', function() {
       gapi.auth2.init();
-      
+
     });
   }
 
@@ -126,8 +155,36 @@ session_start();
         // document.getElementById("pic").src=<?php if(isset($_SESSION['pic'])){echo json_encode($_SESSION['pic']); }?>;
       </script>  -->
 
-      <div class="posts">  
-        <div class="post" id="p1">
+      <div class="posts" id="timeline"> 
+
+        <?php
+
+
+        for($i=0;$i<count($postIDS);$i++){
+          echo '<div class="post" >';
+          echo '<img src="../images/avatar2.jpg" class="card-user" alt="..." style="width:100%">';
+          echo '<div class="card"><div class="card-header">';
+          echo '<span>'.$usernames[$i].'</span>&nbsp; &nbsp;';
+          echo '<img src="../images/follow.svg" class="icons" title="follow" style="margin-bottom: 3px;">
+          </div><div class="card-image">';
+          echo '<img src="../blogForegroundImages/'.$images[$i].'" alt="." style="width:100%">';
+          echo '<button class="card-btn btn"><img src="../images/rightarrow.svg" class="view-icon" 
+          onclick="openBlog(this.id)" id="'.$postIDS[$i].'"></button></div><div class="card-body">';
+          echo '<h1 class="card-title">'.$titles[$i].'</h1>';
+          echo '<p class="card-text">'.$disclaimers[$i].'</p>';
+          echo '<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p></div>
+          <div class="card-header"><span style="font-weight: bold;" class="text-muted">124 
+          likes</span>
+          <img src="../images/share.svg" class="icons" style="position: absolute; right:100px;" title="Share" >
+          <img src="../images/blogging.svg" class="icons" style="position: absolute; right:60px;" title="Comment" >
+          <img src="../images/like.svg" class="icons" id="like" style="position: absolute; right:18px;" onclick="liked(this)" title="Like" >
+          </div></div></div>';
+        }
+
+
+
+        ?>
+        <!-- <div class="post" id="p1">
           <img src="../images/avatar2.jpg" class="card-user" alt="..." style="width:100%">
           <div class="card">
             <div class="card-header">
@@ -165,6 +222,8 @@ session_start();
           </div>
           <div class="card-body">
             <h1 class="card-title">Benefits of Studying</h1>
+            <div id="includedContent"></div>
+            
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
           </div>
@@ -199,7 +258,7 @@ session_start();
         <img src="../images/like.svg" class="icons" id="like" style="position: absolute; right:18px;" onclick="liked(this)" title="Like" >
       </div>
     </div>
-  </div>
+  </div> -->
 
 </div> 
 <!-- endposts -->

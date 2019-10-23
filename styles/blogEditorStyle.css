@@ -1,0 +1,43 @@
+body {
+font-family: 'Roboto Condensed', sans-serif;
+text-align: center;
+}
+h1
+{
+text-align: center;
+background-color: #FEFFED;
+height: 70px;
+color: rgb(95, 89, 89);
+margin: 0 0 -29px 0;
+padding-top: 14px;
+border-radius: 10px 10px 0 0;
+font-size: 35px;
+}
+
+#image_preview{
+
+font-size: 30px;
+text-align: center;
+line-height: 180px;
+font-weight: bold;
+color: #C0C0C0;
+background-color: #FFFFFF;
+overflow: auto;
+}
+
+.submit{
+font-size: 16px;
+background: green;
+border: 1px solid #e5a900;
+color: white;
+font-weight: bold;
+cursor: pointer;
+width: 300px;
+border-radius: 5px;
+padding: 10px 0;
+outline: none;
+margin-top: 20px;
+
+}
+
+
