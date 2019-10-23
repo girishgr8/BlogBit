@@ -4,11 +4,12 @@
 $servername = "localhost";
 $username = "root";
 $password = "1234";
-$dbname = "wordflow2";
+$dbname = "wordflow";
 $port = 3306;
 
 // Create connection
 $conn = new mysqli($servername, $username, $password,$dbname,$port);
+$path = "C:/Users/Gayatri/Desktop/Blogs/";
 
 
 ?>
