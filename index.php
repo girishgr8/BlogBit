@@ -188,11 +188,15 @@ session_start();
                             <label>City</label><br>
                             <input type="text" class="form-control" placeholder="City" name="city" required>
                          </div>
-                         <div class="col-md-4"> <br> 
+                         <div class="col-md-4"><br>
+                            <label>State</label><br> 
+                            <input type="text" class="form-control" placeholder="State" name="state" required>
+                        </div>
+                         <div class="col-md-4 " style="margin-left: 110px;"> <br> 
                          <label>Street</label><br> 
                            <input type="text" class="form-control" placeholder="Street" name="street" required>
                         </div>
-                        <div class="col-md-4 mx-auto"><br>
+                        <div class="col-md-4 " ><br>
                             <label>Pincode</label><br> 
                             <input type="text" class="form-control" placeholder="Pincode" name="pincode" required>
                             <!-- textarea class="form-control" rows="9" placeholder="Address" name="address" required></textarea> -->
