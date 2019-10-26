@@ -32,14 +32,29 @@ while($r=$res->fetch_assoc()){
   <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <!--Including Editor API-->
   <script src="../config/editorAPI/tinymce.min.js"></script>
-  
+  <script>
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.innerHTML);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      ev.target.appendChild('<input   type="text" class="form-control" value='+data+' id="searchbox"/>');
+      //ev.target.appendChild(document.getElementById(data));
+    }
+  </script>
   <script> 
     function openBlog(postID){
-     
-      
+
+
       window.location.href="./blogViewer.php?path="+postID;
     }
-   
+
   </script>
   <script>
     /*logout of both Google and normal session*/
@@ -99,8 +114,8 @@ while($r=$res->fetch_assoc()){
                   <button class="btn searchbtn" type="submit">
                     <span class="glyphicon glyphicon-search invert"></span>
                   </button>
-                </div>
-                <input type="text" class="form-control" placeholder="Search WordFlow" id="searchbox"/>
+                </div ondrop="drop(event)" ondragover="allowDrop(event)" id="div1">
+                <input   type="text" class="form-control" placeholder="Search WordFlow" id="searchbox"/>
               </div>
             </div>
           </div>
@@ -184,100 +199,25 @@ while($r=$res->fetch_assoc()){
 
 
         ?>
-        <!-- <div class="post" id="p1">
-          <img src="../images/avatar2.jpg" class="card-user" alt="..." style="width:100%">
-          <div class="card">
-            <div class="card-header">
-             <span>bubblegumpinkcakeeeeee</span>&nbsp; &nbsp;
-             <img src="../images/follow.svg" class="icons" title="follow" style="margin-bottom: 3px;">
-           </div>
-           <div class="card-image">
-            <img src="../images/cardimg.jpg" alt="." style="width:100%">
-            <button class="card-btn btn"><img src="../images/rightarrow.svg" class="view-icon"></button>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title">Benefits of Studying</h1>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-          </div>
-          <div class="card-header">
-            <span style="font-weight: bold;" class="text-muted">124 likes</span>
-            <img src="../images/share.svg" class="icons" style="position: absolute; right:100px;" title="Share" >
-            <img src="../images/blogging.svg" class="icons" style="position: absolute; right:60px;" title="Comment" >
-            <img src="../images/like.svg" class="icons" id="like" style="position: absolute; right:18px;" onclick="liked(this)" title="Like" >
-          </div>
-        </div>
-      </div>
+        
+      </div> 
+      <!-- endposts -->
+      <div class="recommendations">
 
-      <div class="post" id="p2">
-        <img src="../images/avatar2.jpg" class="card-user" alt="..." style="width:100%">
-        <div class="card">
-          <div class="card-header">
-            <span>bubblegumpinkcakeeeeee</span>&nbsp; &nbsp;
-            <img src="../images/follow.svg" class="icons" title="follow" style="margin-bottom: 3px;">
-          </div>
-          <div class="card-image">
-            <img src="../images/cardimg.jpg" alt="." style="width:100%">
-            <button class="card-btn btn"><img src="../images/rightarrow.svg" class="view-icon"></button>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title">Benefits of Studying</h1>
-            <div id="includedContent"></div>
-            
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-          </div>
-          <div class="card-header">
-            <span style="font-weight: bold;" class="text-muted">124 likes</span>
-            <img src="../images/share.svg" class="icons" style="position: absolute; right:100px;" title="Share" >
-            <img src="../images/blogging.svg" class="icons" style="position: absolute; right:60px;" title="Comment" >
-            <img src="../images/like.svg" class="icons" id="like" style="position: absolute; right:18px;" onclick="liked(this)" title="Like" >
-          </div>
-        </div>
-      </div>
+        <div class="wrapper"><ul class="mat_list cardi">
+         
+         <h5 style="font-weight: bold;">Recommendations</h5>
+         <li><p draggable="true" ondragstart="drag(event)">Girish Thatte</p></li>
+         <li><p draggable="true" ondragstart="drag(event)">Amisha Waghela</p></li>
+         <li><p draggable="true" ondragstart="drag(event)">Rahul Mistry</p></li>
+         <li><p draggable="true" ondragstart="drag(event)">Sheldon Cooper</p></li>
+       </ul>
+     </div>
 
-      <div class="post" id="p3">
-       <img src="../images/avatar1.jpg" class="card-user" alt="..." style="width:100%">
-       <div class="card">
-        <div class="card-header">
-         <span>gayatree</span>&nbsp; &nbsp;<img src="../images/follow.svg" class="icons" title="follow" style="margin-bottom: 3px;">
-       </div>
-       <div class="card-image">
-        <img src="../images/1.jpg" alt="..." style="width:100%">
-        <button class="card-btn btn"><img src="../images/rightarrow.svg" class="view-icon"></button>
-      </div>
-      <div class="card-body">
-        <h1 class="card-title">Lets go to the library because why not</h1>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-      <div class="card-header">
-        <span style="font-weight: bold;" class="text-muted">124 likes</span>
-        <img src="../images/share.svg" class="icons" style="position: absolute; right:100px;" title="Share" >
-        <img src="../images/blogging.svg" class="icons" style="position: absolute; right:60px;" title="Comment" >
-        <img src="../images/like.svg" class="icons" id="like" style="position: absolute; right:18px;" onclick="liked(this)" title="Like" >
-      </div>
-    </div>
-  </div> -->
+   </div>
 
-</div> 
-<!-- endposts -->
-<div class="recommendations">
-
-  <div class="wrapper"><ul class="mat_list cardi">
-   somebody plej do this part its annoying
-   <h5 style="font-weight: bold;">Recommendations</h5>
-   <li><p>Username1</p></li>
-   <li><p>AnotherUser123</p></li>
-   <li><p>Lalalauser</p></li>
-   <li><p>HEHEHEyey</p></li>
- </ul>
-</div>
-
-</div>
-
-</div>
-<!-- endcontainer -->
+ </div>
+ <!-- endcontainer -->
 
 </body>
 
