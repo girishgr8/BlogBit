@@ -32,6 +32,7 @@ while($r=$res->fetch_assoc()){
   <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <!--Including Editor API-->
   <script src="../config/editorAPI/tinymce.min.js"></script>
+  
   <script>
     function allowDrop(ev) {
       ev.preventDefault();

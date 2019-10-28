@@ -30,6 +30,7 @@ session_start();
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="http://www.jqueryscript.net/demo/jQuery-Plugin-For-Water-Ripple-Animation-ripples/js/jquery.ripples.js">
     </script>
+    <script type="text/javascript" src="./scripts/angular-contact-form.js"></script>
 
     <link rel="stylesheet" href="./styles/index.css"/>
     <script>
@@ -308,53 +309,64 @@ session_start();
             <iframe width="1000" height="345" src="https://www.youtube.com/embed/osHHhRpoUWk">
             </iframe>
         </div>
+        
     </section>
+    <section class="py-5" id="contact">
+       <div class="container">
+        <h2 class="font-weight-light">Contact Us!</h2>
+        <h4><div id="result"></div></h4>
 
+        <app-contact></app-contact>
+        <p>Need a kickstart? Here are 10 reasons why you should start blogging!</p>
+        <iframe width="1000" height="345" src="https://www.youtube.com/embed/osHHhRpoUWk">
+        </iframe>
+    </div>
 
-    <footer id="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-6 col-sm-3 column">
-                    <h4>Information</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="">Products</a></li>
-                        <li><a href="">Services</a></li>
-                        <li><a href="">Benefits</a></li>
-                        <li><a href="">Developers</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-6 col-sm-3 column">
-                    <h4>About</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Delivery Information</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms &amp; Conditions</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-3 column">
-                    <h4>Stay Posted</h4>
-                    <form>
-                        <div class="form-group">
-                          <input type="text" class="form-control" title="No spam, we promise!" placeholder="Tell us your email">
-                      </div>
-                      <div class="form-group">
-                          <button class="btn btn-primary" data-toggle="modal" data-target="#alertModal" type="button">Subscribe for updates</button>
-                      </div>
-                  </form>
-              </div>
-
-
+</section>
+<footer id="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-6 col-sm-3 column">
+                <h4>Information</h4>
+                <ul class="list-unstyled">
+                    <li><a href="">Products</a></li>
+                    <li><a href="">Services</a></li>
+                    <li><a href="">Benefits</a></li>
+                    <li><a href="">Developers</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-6 col-sm-3 column">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Delivery Information</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms &amp; Conditions</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-3 column">
+                <h4>Stay Posted</h4>
+                <form>
+                    <div class="form-group">
+                      <input type="text" class="form-control" title="No spam, we promise!" placeholder="Tell us your email">
+                  </div>
+                  <div class="form-group">
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#alertModal" type="button">Subscribe for updates</button>
+                  </div>
+              </form>
           </div>
-      </footer>
 
-      <div id="hidden_form_container" style="display:none;"></div>
 
-  </body>
-  </html>
-  <?php
-  if(isset($_SESSION["loginFail"]))
-  {
+      </div>
+  </footer>
+
+  <div id="hidden_form_container" style="display:none;"></div>
+
+</body>
+</html>
+<?php
+if(isset($_SESSION["loginFail"]))
+{
     if($_SESSION["loginFail"]==1){
         echo '<script language="javascript">';
         echo 'alert("Login Failed. Input valid Credentials/ try using registered email")';
