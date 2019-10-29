@@ -11,8 +11,9 @@ $title=$parts[1];
 <link rel="stylesheet" type="text/css" href="../styles/blogViewer.css">
 <script type="text/javascript">
 	var path=<?php echo json_encode($path);?>;
+	var path2= path.replace(' ', '%20');
 	$(function(){
-		$("#blogContent").load("../Blogs/"+path+".html"); 
+		$("#blogContent").load("../Blogs/"+path2+".html"); 
 	});
 </script>
 

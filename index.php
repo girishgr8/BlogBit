@@ -317,9 +317,7 @@ session_start();
         <h4><div id="result"></div></h4>
 
         <app-contact></app-contact>
-        <p>Need a kickstart? Here are 10 reasons why you should start blogging!</p>
-        <iframe width="1000" height="345" src="https://www.youtube.com/embed/osHHhRpoUWk">
-        </iframe>
+        
     </div>
 
 </section>
