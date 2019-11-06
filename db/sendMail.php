@@ -8,14 +8,16 @@ $name = $_GET['name'];
 $user1 = $_GET['user1'];
 $user2 = $_GET['user2'];
 $email1 = $_GET['email1'];
+$details = $_GET['details'];
 
 $to;
 $subject = "A WordFlow user requested for meetup";
 $message = "Dear $user2,
 
-            $user1 requested you for meet up.
-            Contact him at $email1 for further details.....
-            
+            $user1 ($name) requested you for meet up.
+            Contact him at $email1 for further details.
+            Meetup Details are: 
+            $details
             ";
  
 $sql = "SELECT email from user where username = '$user2'";
@@ -40,10 +42,13 @@ $mail ->Subject = $subject;
 $mail ->Body = $message;
 $mail ->AddAddress($to);
 
-if(!$mail ->Send())
-    echo "Invitation Failed....!";
-else
+if($mail ->Send()){
+    $date = date("d/m/Y");
+    $time = date("h:i:s a");
+    $sql = "INSERT into meetup VALUES('$user2', '$user1', '$details', '$date', '$time');";
+    $result = $conn->query($sql);
     echo "Invitation sent successfully to $user2...!";
-       
-
+}
+else
+    echo "Invitation Failed....!";
 ?>

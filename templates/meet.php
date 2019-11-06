@@ -50,17 +50,6 @@ include ('../config/db_connect.php');
   }
 }
 
-
-function sendInviteMail(){
-		GoogleUser = GoogleAuth.currentUser.listen();
-		console.log('ID: ' + GoogleUser.getId());
-		alert('Full Name: ' + profile.getName());
-		console.log('Given Name: ' + profile.getGivenName());
-		console.log('Family Name: ' + profile.getFamilyName());
-		console.log('Image URL: ' + profile.getImageUrl());
-		console.log('Email: ' + profile.getEmail());
-}
-
 </script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -94,7 +83,7 @@ function sendInviteMail(){
       </div>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="./dashboard.php" class="nav-item nav-link" title="Home"><img src="../images/home.svg" class="icons invert"></a></li>
-        <li><a href="#" class="nav-item nav-link" title="Message"><img src="../images/msg.svg" class="icons invert"></a></li>
+        <li><a href="./messages.php" class="nav-item nav-link" title="Message"><img src="../images/msg.svg" class="icons invert"></a></li>
 
         <li><a href="#" class="nav-item nav-link" title="Saved Posts"><img src="../images/save2.svg" class="icons invert"></a></li>
         <li><a href="./meet.php" class="nav-item nav-link" title="Meet a friend"><img src="../images/map.svg" class="icons highlight-icon"></a></li>
@@ -234,7 +223,7 @@ function sendInviteMail(){
 <script>
 
   var latSrc="",latDest="",lngSrc="",lngDest="",src="",dest="";
-
+      var meetUpDetails;
   var HttpClient = function() {
     this.get = function(aUrl, aCallback) {
       var anHttpRequest = new XMLHttpRequest();
@@ -318,6 +307,7 @@ function sendInviteMail(){
             let result = JSON.parse(response);
             var location = result.Response.View[0].Result[0];
             var content = location.Location.Address.Label;
+            meetUpDetails = content;
             var country = location.Location.Address.Country;
             var state = location.Location.Address.State;
             var county = location.Location.Address.county;
@@ -329,12 +319,7 @@ function sendInviteMail(){
             var data = "<h3>You can meet Halfway at<br>  "+content+"</b>"+"<br><br>City: "+city+"<br>"+"State: "+state+"<br>Country: "+country+"<br>Postal Code: "+postalCode+"</h3>"; 
             document.getElementById("wrapperMidway").style.display="block";
             document.getElementById("midpointData").innerHTML=data;
-
-
-
           });
-
-
   }
 
   function showMap(){
@@ -433,7 +418,7 @@ function sendInviteMail () {
   var xhr = new XMLHttpRequest ();
   var url = '../db/sendMail.php';
   var response;
-  var params = 'name='+name.toString () + '&user1='+user1.toString () + '&email1=' + email1.toString() + '&user2='+user2.toString ();
+  var params = 'name='+name.toString () + '&user1='+user1.toString () + '&email1=' + email1.toString() + '&user2='+user2.toString () + '&details='+meetUpDetails;
   var sendData = url + '?'+params;
   xhr.open ('GET', sendData, true);
   xhr.onreadystatechange = function () {
