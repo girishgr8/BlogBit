@@ -17,29 +17,26 @@ include ('../config/db_connect.php');
   <script>
 
     function openEditor(){
-    window.location.href="./blogEditor.php";
-  }
+		window.location.href="./blogEditor.php";
+	}
     /*logout of both Google and normal session*/
     function logout() {
       var r = confirm("Do you wish to logout?");
       if (r == true) {
        var auth2 = gapi.auth2.getAuthInstance();
-       auth2.signOut().then(function () {
-        console.log("tried to logout");
+       auth2.signOut().then(() => {
         document.location.href = '../db/logout.php';
       });
        auth2.disconnect();
        document.location.href = '../db/logout.php';
      }
-
-   }        /*initialising auth instance*/
+   }
+   var GoogleAuth;
    function onLoad() {
-    gapi.load('auth2', function() {
-      gapi.auth2.init();
-      
-    });
-  }
-
+		gapi.load('auth2', () => {
+			GoogleAuth = gapi.auth2.init();
+		});
+   }
   function liked(heart) {
    console.log('liked');
    source=heart.src;	
@@ -51,6 +48,17 @@ include ('../config/db_connect.php');
   {
     heart.src = "../images/like.svg";
   }
+}
+
+
+function sendInviteMail(){
+		GoogleUser = GoogleAuth.currentUser.listen();
+		console.log('ID: ' + GoogleUser.getId());
+		alert('Full Name: ' + profile.getName());
+		console.log('Given Name: ' + profile.getGivenName());
+		console.log('Family Name: ' + profile.getFamilyName());
+		console.log('Image URL: ' + profile.getImageUrl());
+		console.log('Email: ' + profile.getEmail());
 }
 
 </script>
@@ -177,13 +185,6 @@ include ('../config/db_connect.php');
       <div class="flex-container">
         <div class="content-container">
           <div class="form-container">
-
-
-
-            
-
-
-
             <div class="xc" style="width: 100%;">
               <h2 >Here's your Route!</h2>
               <hr >
@@ -217,7 +218,7 @@ include ('../config/db_connect.php');
 
               </div>
               <br>
-              <button class="btn greenify" style=" font-size: 1.5em; width: 40%; margin-top: 20px;" onclick="#">Invite To Meet</button>
+              <button class="btn greenify" style=" font-size: 1.5em; width: 40%; margin-top: 20px;" onclick="sendInviteMail()">Invite To Meet</button>
             </div>
           </div>
         </div>
@@ -230,7 +231,6 @@ include ('../config/db_connect.php');
 
 
 </body>
-
 <script>
 
   var latSrc="",latDest="",lngSrc="",lngDest="",src="",dest="";
@@ -418,5 +418,32 @@ function findMidPoint(){
 
 }
 showPosition();
+function sendInviteMail () {
+  var str = `<?php
+    $name = $_SESSION["name"];
+    $username = $_SESSION["username"];
+    $email=$_SESSION["email"];
+	  echo $name."\n".$username."\n".$email;
+	?>`;
+
+  var name = str.split ('\n')[0];
+  var user1 = str.split ('\n')[1];
+  var email1 = str.split("\n")[2] 
+  var user2 = document.getElementById ('user2').value;
+  var xhr = new XMLHttpRequest ();
+  var url = '../db/sendMail.php';
+  var response;
+  var params = 'name='+name.toString () + '&user1='+user1.toString () + '&email1=' + email1.toString() + '&user2='+user2.toString ();
+  var sendData = url + '?'+params;
+  xhr.open ('GET', sendData, true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      response = xhr.responseText;
+      alert(response);
+    }
+  };
+  xhr.send ();
+}
+
 </script>
 </html>
