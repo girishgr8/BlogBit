@@ -21,6 +21,7 @@ $images=[];
 $disclaimers=[];
 $titles=[];
 $postIDS=[];
+// $blogIDs=[];
 $usernames=[];
 $likes = [];
 
@@ -30,7 +31,10 @@ while($r=$res->fetch_assoc()){
   $images[]=$r['username'].'_'.$r['title'].'.png';
   $disclaimers[]=$r['disclaimer'];
   $titles[]=$r['title'];
-  $postIDS[]=$r['username'].'_'.$r['title'];  
+  // $blogIDs=$r['blogID'];
+  $postIDS[]=$r['username'].'_'.$r['title'];
+  // '_'.$r['blogID']  
+// arts[0].'_'.$parts[1]
   $usernames[]=$r['username'];   
   $likes[] = $r['likes'];
 }
@@ -270,6 +274,7 @@ while($r=$res->fetch_assoc()){
           onclick="openBlog(this.id)" id="'.$postIDS[$i].'"></button></div><div class="card-body">';
           echo '<h1 class="card-title">'.$titles[$i].'</h1>';
           echo '<p class="card-text">'.$disclaimers[$i].'</p>';
+
           echo '<p class="card-text"><small class="text-muted" id="text:'.$postIDS[$i].'">Last updated 3 mins ago</small></p></div>
           <div class="card-header"><span style="font-weight: bold;"  class="text-muted" id="count:'.$postIDS[$i].'">'.$likes[$i].' likes</span>
           <img src="../images/blogging.svg" class="icons" style="position: absolute; right:100px;" title="Comment" >';
@@ -277,11 +282,13 @@ while($r=$res->fetch_assoc()){
             echo '<img src="../images/like.svg" class="icons" id="like:'.$postIDS[$i].'" style="position: absolute; right:60px;" onclick="likedBlog(this)" title="Like" >';
           else
             echo '<img src="../images/liked.svg" class="icons" id="like:'.$postIDS[$i].'" style="position: absolute; right:60px;" onclick="likedBlog(this)" title="Liked !" >';
+          </div></div></div>';
           if($saved==0)
             echo '<img src="../images/saveBlog.png" class="icons" id="id:'.$postIDS[$i].'" style="position: absolute; right:18px;" onclick="saveBlog(this)" title="Save" >';
           else
             echo '<img src="../images/save2.svg" class="icons" id="id:'.$postIDS[$i].'" style="position: absolute; right:18px;" onclick="saveBlog(this)" title="Saved !" >' ;
           echo '</div></div></div>';
+
         }
 
 
