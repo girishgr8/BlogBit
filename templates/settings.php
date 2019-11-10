@@ -1,6 +1,7 @@
 
 <?php
 session_start();
+include ('../config/db_connect.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,12 +83,10 @@ session_start();
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="./dashboard.php" class="nav-item nav-link" title="Home"><img src="../images/home.svg" class="icons invert"></a></li>
-      <li><a href="#" class="nav-item nav-link" title="Message"><img src="../images/msg.svg" class="icons invert"></a></li>
-      
+      <li><a href="./messages.php" class="nav-item nav-link" title="Message"><img src="../images/msg.svg" class="icons invert"></a></li>      
       <li><a href="#" class="nav-item nav-link" title="Saved Posts"><img src="../images/save2.svg" class="icons invert"></a></li>
       <li><a href="./meet.php" class="nav-item nav-link" title="Meet a friend"><img src="../images/map.svg" class="icons invert"></a></li>
       <!-- <li><a href="#" class="nav-item nav-link" title="Liked Posts"><img src="../images/heart.svg" class="icons invert"></a></li> -->
-
 
       <li><a href="#" class="nav-item nav-link " data-toggle="dropdown" data-target=".userdrop" title="Your Profile"><img src="../images/user.svg" class="icons highlight-icon"></a>
       <div class="dropdown userdrop">
@@ -114,6 +113,26 @@ session_start();
 </nav>
 <!------------------------------------------------------------------------------------------------------------------------------------------------>
 
+<?php
+              $name = $_SESSION["name"];
+              $email = $_SESSION["email"];
+              $password=$_SESSION["password"];
+              $username=$_SESSION["username"];
+              $sql="Select phone, city, state, country, street, pincode from user where username = '$username'";
+              $result = $conn->query($sql);
+              if($result->num_rows>0){
+                  while($row = $result->fetch_assoc()) {
+                      $phone=$row["phone"];
+                      $city=$row["city"];
+                      $state=$row["state"];
+                      $country=$row["country"];
+                      $street=$row["street"];
+                      $pin=$row["pincode"];
+                }
+                $addr = $street.", ".$city.", ".$pin." \r\n, ".$state.", ".$country;
+              }
+              ?>
+
 <div class="container" style="padding-top: 120px;">
   <div class="settings">
     <h2>Account Settings</h2>
@@ -125,32 +144,34 @@ session_start();
         <tbody>
           <tr>
             <th style="padding:30px" scope="row">Email</th>
-            <td style="padding:30px"><input type="email" readonly class="form-control-plaintext" id="userEmail" value="amishabw@gmail.com">
-                <form>
+            <td style="padding:30px"><input type="email" readonly class="form-control-plaintext"  value="<?php echo $email ?>">
+                <form method="post" action="../db/updateEmail.php">
                 <div class="collapse" id="editEmail" style="width: 50%;"><br><br>
-                              <input type="email" class="form-control" placeholder="New email"><br>
-                              <input type="password" class="form-control" placeholder="Current password"><br>
+                              <input type="email" name="newEmail" class="form-control" placeholder="New email" required><br>
+                              <input type="password" name="pass" class="form-control" placeholder="Current password" required><br>
                               <input type="submit" class="btn btn-primary" value="Save">
-                              <input type="submit" class="btn" style="color: white; background-color: darkgray;" data-toggle="collapse" data-target="#editEmail" value="Cancel">
+                              <input  class="btn" style="color: white; background-color: darkgray; width: 70px;" data-toggle="collapse" data-target="#editEmail" value="Cancel">
                 </div>
               </form>
+              
             </td>
             <td style="padding:30px"><img src="../images/editopt.svg" data-toggle="collapse" data-target="#editEmail" class="edit"></td>
           </tr>
           <tr> 
             <th style="padding:30px" scope="row">Name</th>
-            <td style="padding:30px"><input type="email" readonly class="form-control-plaintext" id="userName" value="Amisha Bipin Waghela">
-              <form>
+            <td style="padding:30px"><input type="text" readonly class="form-control-plaintext"  value="<?php echo $name ?>">
+              <form method="post" action="../db/updateName.php">
               <div class="collapse" id="editName" style="width: 50%;"><br><br>
                             <!-- <label>First Name:</label> -->
-                            <input type="text" class="form-control" placeholder="First Name"><br>
+                            <input type="text" class="form-control" name="fname" placeholder="First Name" required><br>
                             <!-- <label>Middle Name:</label> -->
-                            <input type="text" class="form-control" placeholder="Middle Name"><br>
+                            <input type="text" class="form-control" name="mname" placeholder="Middle Name"><br>
                             <!-- <label>Last Name:</label> -->
-                            <input type="text" class="form-control" placeholder="Last Name">
+                            <input type="text" class="form-control" name="lname" placeholder="Last Name" required><br>
+                            <input type="password" class="form-control" name="pass2" placeholder="Current Password" required>
                             <br>
                             <input type="submit" class="btn btn-primary" value="Save">
-                            <input type="submit" class="btn" style="color: white; background-color: darkgray;" data-toggle="collapse" data-target="#editName" value="Cancel">
+                            <input  class="btn" style="color: white; background-color: darkgray; width: 70px;" data-toggle="collapse" data-target="#editName" value="Cancel">
               </div>
             </form>
             </td> <!-- concat first middle last-->
@@ -158,21 +179,66 @@ session_start();
           </tr>
           <tr>
             <th style="padding:30px" scope="row">Password</th>
-            <td style="padding:30px"><input type="password" readonly class="form-control-plaintext" id="userPass" value="amisha123">
-              <form>
+            <td style="padding:30px"><input type="password" readonly class="form-control-plaintext"  value="<?php echo $password ?>">
+              <form method="post" action="../db/updatePass.php">
                 <div class="collapse" id="editPass" style="width: 50%;"><br><br>
-                              <input type="password" class="form-control" placeholder="Current password"><br>
-                              <input type="password" class="form-control" placeholder="New password"><br>
+                              <input type="password" class="form-control" placeholder="Current password" name="pass3" required><br>
+                              <input type="password" class="form-control" placeholder="New password" name="newPass" required><br>
                               <input type="submit" class="btn btn-primary" value="Save">
-                              <input type="submit" class="btn" style="color: white; background-color: darkgray;" data-toggle="collapse" data-target="#editEmail" value="Cancel">
+                              <input  class="btn" style="color: white; background-color: darkgray; width: 70px;" data-toggle="collapse" data-target="#editEmail" value="Cancel">
                 </div>
               </form>
             </td>
             <td style="padding:30px"><img src="../images/editopt.svg" data-toggle="collapse" data-target="#editPass" class="edit"></td>
           </tr>
+          <tr>
+            <th style="padding:30px" scope="row">Contact</th>
+            <td style="padding:30px"><input type="text" readonly class="form-control-plaintext" value="<?php echo $phone ?>">
+                <form method="post" action="../db/updatePhone.php">
+                <div class="collapse" id="editPhone" style="width: 50%;"><br><br>
+                              <input type="tel" class="form-control" placeholder="Phone" name="phone"  pattern="[0-9]{10}" required><br>
+                              <input type="password" name="pass4" class="form-control" placeholder="Current password" required><br>
+                              <input type="submit" class="btn btn-primary" value="Save">
+                              <input  class="btn" style="color: white; background-color: darkgray; width: 70px;" data-toggle="collapse" data-target="#editPhone" value="Cancel">
+                </div>
+              </form>
+            </td>
+            <td style="padding:30px"><img src="../images/editopt.svg" data-toggle="collapse" data-target="#editPhone" class="edit"></td>
+          </tr>
+          <tr>
+            <th style="padding:30px" scope="row">Address</th>
+            <td style="padding:30px"><input type="text" readonly class="form-control-plaintext" style="width: 100%; text-align: left;" value="<?php echo $addr ?>">
+                <form method="post" action="../db/updateAddr.php">
+                <div class="collapse" id="editAddr" style="width: 50%;"><br><br>
+                              <input type="text" name="street" class="form-control" placeholder="Street" required><br>
+                              <input type="text" name="city" class="form-control" placeholder="City" required><br>
+                              <input type="text" name="pin" class="form-control" placeholder="Pincode" required><br>
+                              <input type="text" name="state" class="form-control" placeholder="State" required><br>
+                              <input type="text" name="country" class="form-control" placeholder="Country" required><br>
+
+                              <input type="password" name="pass5" class="form-control" placeholder="Current password" required><br>
+                              <input type="submit" class="btn btn-primary" value="Save">
+                              <input  class="btn" style="color: white; background-color: darkgray; width: 70px;" data-toggle="collapse" data-target="#editAddr" value="Cancel">
+                </div>
+              </form>
+            </td>
+            <td style="padding:30px"><img src="../images/editopt.svg" data-toggle="collapse" data-target="#editAddr" class="edit"></td>
+          </tr>
         </tbody>
     </table>
   </div>
+  <br><br>
 </div>
+<?php
+if(isset($_SESSION["updateFail"]))
+{
+    if($_SESSION["updateFail"]==1){
+        echo '<script language="javascript">';
+        echo 'alert("Incorrect Password.")';
+        echo '</script>';
+        $_SESSION["updateFail"]=0;
+    }
+    
+}?>
 </body>
 </html>
