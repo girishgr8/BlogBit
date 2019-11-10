@@ -1,25 +1,112 @@
 <?php
 session_start();
+include ('../config/db_connect.php');
 
 ?>
-
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+  <title>WordFlow</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="431755900850-hj63duh4igs0cmhig2tke2t6h0c0gk0g.apps.googleusercontent.com" />
+  <!--Including Editor API-->
+  <script src="../config/editorAPI/tinymce.min.js"></script>
+  <script>
+    function openEditor(){
+    window.location.href="./blogEditor.php";
+  }
+    /*logout of both Google and normal session*/
+    function logout() {
+        var r = confirm("Do you wish to logout?");
+        if (r == true) {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(() => {
+            document.location.href = '../db/logout.php';
+        });
+        auth2.disconnect();
+        document.location.href = '../db/logout.php';
+        }
+    }
+   
+   function onLoad() {
+    gapi.load('auth2', () => {
+      GoogleAuth = gapi.auth2.init();
+    });
+   }
 
- <!--Google Client ID-->
- <script src="https://apis.google.com/js/platform.js" async defer></script>
- <meta name="google-signin-client_id" content="431755900850-hj63duh4igs0cmhig2tke2t6h0c0gk0g.apps.googleusercontent.com" />
- <!--Including Editor API-->
- <script src="https://cdn.tiny.cloud/1/0rp9qijguo688adw7ay49oq2h5aexu3w8vp66bh38k8hpzls/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
- <script
- src="https://code.jquery.com/jquery-3.4.1.min.js"
- integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
- crossorigin="anonymous"></script>
+    function liked(heart) {
+        console.log('liked');
+        source=heart.src; 
+        if (source.slice(-8,-4) == "like") {
+            heart.src = "../images/liked.svg";
+        }else {
+            heart.src = "../images/like.svg";
+        }
+    }
+    </script>
 
- <link rel="stylesheet" type="text/css" href="../styles/blogEditorStyle.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../styles/dashboard.css"/>
+    </head>
+    <body>
 
+        <nav class="navbar navbar-default  navbar-expand-lg fixed-top ">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><span class="brand">WordFlow</span></a>
+        </div>
+        <div class="nav navbar-nav navbar-form">
+            <form action="" method="GET" class="form-inline"> 
+            <div class="row">
+                <div class="col-md-40">
+                <div class="input-group">
+                    <div class="input-group-btn">
+                    <button class="btn searchbtn" type="submit">
+                        <span class="glyphicon glyphicon-search invert"></span>
+                    </button>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Search WordFlow" id="searchbox"/>
+                </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="./dashboard.php" class="nav-item nav-link" title="Home"><img src="../images/home.svg" class="icons invert"></a></li>
+            <li><a href="./messages.php" class="nav-item nav-link" title="Message"><img src="../images/msg.svg" class="icons invert"></a></li>
+
+            <li><a href="#" class="nav-item nav-link" title="Saved Posts"><img src="../images/save2.svg" class="icons invert"></a></li>
+            <li><a href="./meet.php" class="nav-item nav-link" title="Meet a friend"><img src="../images/map.svg" class="icons invert"></a></li>
+            <!-- <li><a href="#" class="nav-item nav-link" title="Liked Posts"><img src="../images/heart.svg" class="icons invert"></a></li> -->
+
+            <li><a href="#" class="nav-item nav-link " data-toggle="dropdown" data-target=".userdrop" title="Your Profile"><img src="../images/user.svg" class="icons invert"></a>
+            <div class="dropdown userdrop">
+                <ul class="dropdown-menu">
+                    <li class="dropdown-header">Account</li>
+                    <li><a href="#" onclick="logout()">Log Out</a></li>
+                    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+                    <li><a href="./settings.php">Settings</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header">WordFlow</li>
+                    <li><a href="#">Posts</a></li>
+                    <li><a href="#">Likes</a></li>
+                    <li><a href="#">Edit appearance</a></li>
+                </ul>
+            </div>
+            </li>
+            <button class="btn navbar-btn item writebtn3" title="Create" onclick="openEditor()"> &nbsp;<img src="../images/pencil.svg" class="icons">&nbsp;</button>
+            </ul>
+        </div>
+        </nav>
+
+ <!-- <link rel="stylesheet" type="text/css" href="../styles/blogEditorStyle.css"> -->
+<!-------------------------------------------------------------------------------------------------------------------------------->
  <script>
 
   /*Instantiating the EditorAPI*/
@@ -91,6 +178,13 @@ session_start();
 
 <!--Hiding the watermarks of API-->
 <style>
+  hr{
+    border: 50px solid #022012;
+  }
+  body{
+    text-align: center;
+    color: white;
+  }
   .tox .tox-statusbar__path {
     display: none;
   }
@@ -106,26 +200,26 @@ session_start();
 <body>
 
 
-  <input placeholder="Enter your blog title" id="title" style="height: 50px; width: 900px; font-size: 45px;">
+  <input placeholder="Enter your blog title" id="title" style="height: 50px; width: 90%; font-size: 45px; padding: 10px;color: black; margin-top: 80px !important;">
   <br>
-  <hr>
+  <!-- <hr> -->
   <br>
 
   <!--Editor Area Starts-->
   <div>
-    <textarea id="mytextarea" name="mytextarea" style="height: 500px;"></textarea>
+    <textarea id="mytextarea" name="mytextarea" style="height: 500px; margin: auto;"></textarea>
   </div>
   <!--Editor Area Ends-->
   <hr>
   <!--Foreground Image div Starts-->
   <div style="margin-top: 40px;">
-    Select a foreground tile image for your blog
+    <h4>Select a foreground title image for your blog</h4>
     <form id="uploadimage" action="" method="post" enctype="multipart/form-data">
       <div id="image_preview" style="text-align: center;">
         <img id="previewing" src="../images/noimage.png" /><br></div>
-        <div>
-          <input type="file" name="file" id="file" required /> <br>       
-          <input type="submit" value="Upload" class="submit" />
+        <div><br>
+          <input type="file" name="file" id="file" class="btn greenify" style="margin: auto;" required /> <br>       
+          <input type="submit" value="Upload" style=" font-size: 20px;" class="btn greenify" />
         </div>
 
       </form>
@@ -134,12 +228,12 @@ session_start();
     <hr>
     <!--Disclaimer div Starts-->
     <div style="margin-top: 60px;">
-      Write a disclaimer for your blog
+      <h4>Write a description for your blog</h4>
       <form id="blogDisclaimer">
-        <input type="text" name="disclaimer"  id="disclaimer" required style="height: 200px; width: 500px;" /><br>
-        <input type="submit" value="Save disclaimer" class="submit" />
+        <input type="text" name="disclaimer"  id="disclaimer" required style="height: 200px; width: 500px; color: black; font-size: 20px;" /><br><br>
+        <input type="submit" value="Save Description" style=" font-size: 20px;" class="btn greenify"  />
       </form>
-    </div>
+    </div><br><br>
     <!--Disclaimer div Ends-->
 
   </body>
