@@ -2,6 +2,17 @@
 <?php
 session_start();
 include ('../config/db_connect.php');
+$username = $_SESSION['username'];
+$querycheck ="SELECT savedBlogs FROM user WHERE username = '$username'";
+$countrows = ($conn->query($querycheck))->num_rows;
+$res=$conn->query($querycheck);
+while($r=$res->fetch_assoc()){
+  $temp = $r['savedBlogs'];
+}
+
+$parts = explode(',', $temp);
+
+
 
 $images=[];
 $disclaimers=[];
@@ -58,6 +69,51 @@ while($r=$res->fetch_assoc()){
 
       window.location.href="./blogViewer.php?path="+postID;
     }
+    function saveBlog(post){
+      postID=post.id;
+      res = postID.split(":");  
+      source=post.src; 
+
+      if(source.slice(-12,-4)=="saveBlog"){
+        
+        $.post(
+          '../db/editSavedBlog.php',
+          {
+            save:1,
+            postID:res[1]
+          },
+
+          function(result){
+            alert("You have saved this blog");
+
+          }
+
+          );
+        post.src = "../images/save2.svg";
+      }
+
+
+      else 
+      {
+
+       
+        $.post(
+          '../db/editSavedBlog.php',
+          {
+            remove:1,
+            postID:res[1]
+          },
+
+          function(result){
+            alert("Removed from your saved blogs");
+
+          }
+
+          );
+        post.src = "../images/saveBlog.png";
+      }
+    }
+
 
   </script>
   <script>
@@ -127,8 +183,15 @@ while($r=$res->fetch_assoc()){
       </div>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="./dashboard.php" class="nav-item nav-link" title="Home"><img src="../images/home.svg" class="icons highlight-icon"></a></li>
+
+
+        <li><a href="./displaySavedBlogs.php" class="nav-item nav-link" title="Saved Posts"><img src="../images/save2.svg" class="icons invert"></a></li>
+
         <li><a href="./messages.php" class="nav-item nav-link" title="Message"><img src="../images/msg.svg" class="icons invert"></a></li>
-        <li><a href="#" class="nav-item nav-link" title="Saved Posts"><img src="../images/save2.svg" class="icons invert"></a></li>
+    
+        
+
+       
         <li><a href="./meet.php" class="nav-item nav-link" title="Meet a friend"><img src="../images/map.svg" class="icons invert"></a></li>
         <!-- <li><a href="#" class="nav-item nav-link" title="Liked Posts"><img src="../images/heart.svg" class="icons invert"></a></li> --> 
                
@@ -178,6 +241,13 @@ while($r=$res->fetch_assoc()){
 
 
         for($i=0;$i<count($postIDS);$i++){
+          $saved=0;
+          for ($x = 0; $x < count($parts); $x++) {
+            if($parts[$x]==$postIDS[$i]){
+              $saved=1;
+              break;
+            }
+          }
           echo '<div class="post" >';
           echo '<img src="../images/avatar2.jpg" class="card-user" alt="..." style="width:100%">';
           echo '<div class="card"><div class="card-header">';
@@ -192,11 +262,20 @@ while($r=$res->fetch_assoc()){
           echo '<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p></div>
           <div class="card-header"><span style="font-weight: bold;" class="text-muted">124 
           likes</span>
+
           <img src="../images/share.svg" class="icons" style="position: absolute; right:100px;" title="Share" >
           <img src="../images/blogging.svg" class="icons" style="position: absolute; right:60px;" title="Comment" 
           onclick="openBlog(this.id)" id="'.$postIDS[$i].'">
           <img src="../images/like.svg" class="icons" id="like" style="position: absolute; right:18px;" onclick="liked(this)" title="Like" >
           </div></div></div>';
+
+
+          if($saved==0)
+            echo '<img src="../images/saveBlog.png" class="icons" id="id:'.$postIDS[$i].'" style="position: absolute; right:18px;" onclick="saveBlog(this)" title="Like" >';
+          else
+            echo '<img src="../images/save2.svg" class="icons" id="id:'.$postIDS[$i].'" style="position: absolute; right:18px;" onclick="saveBlog(this)" title="Like" >' ;
+          echo '</div></div></div>';
+
         }
 
 
@@ -208,7 +287,7 @@ while($r=$res->fetch_assoc()){
       <div class="recommendations">
 
         <div class="wrapper"><ul class="mat_list cardi">
-         
+
          <h5 style="font-weight: bold;">Recommendations</h5>
          <li><p draggable="true" ondragstart="drag(event)">Girish Thatte</p></li>
          <li><p draggable="true" ondragstart="drag(event)">Amisha Waghela</p></li>
