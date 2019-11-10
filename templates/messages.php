@@ -104,6 +104,7 @@ include ('../config/db_connect.php');
             </ul>
         </div>
         </nav>
+        <!------------------------------------------------------------------------------------------------------------------->
         <div class="container" id="myContainer"></div>
         <script>
         window.onload = function(){
