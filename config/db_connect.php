@@ -4,7 +4,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "1234";
-$dbname = "wordflow";
+$dbname = "wordflow2";
 $port = 3306;
 
 // Create connection
