@@ -3,6 +3,7 @@ session_start();
 include ('../config/db_connect.php');
 $path = $_GET['path'];
 $parts = explode('_', $path);
+$userNamee = $_SESSION['username'];
 $title=$parts[1];
 // $blogID = $parts[2];
 // $blogID = $_GET['blogID'];
@@ -77,6 +78,33 @@ while($r=$res->fetch_assoc()){
             heart.src = "../images/like.svg";
         }
     }
+
+    function makeComment(){
+        // echo '<div class="commentBox">';
+        //     echo '<h5><b>'.$userName[$i].'</b><span class="date sub-text">&nbsp;·&nbsp;'.$timestamp[$i].'</span></h5>';
+        //     echo '<p class="taskDescription">'.$comment[$i].'</p>';
+        //     echo '</div>';
+        // }
+            var comment = document.getElementById('comm').value;
+            var user = <? php echo $userNamee ?>;
+            var box = document.getElementById('dbox');
+            var iDiv = document.createElement('div');
+            iDiv.className = "commentBox";
+            var h5 = document.createElement('h5');
+            var a = document.createElement('p');
+            a.className = 'taskDescription';
+            user = user.bold();
+            h5.innerHTML = user;
+            a.innerHTML = comment;
+            iDiv.appendChild(h5);
+            iDiv.appendChild(a);
+            box.appendChild(iDiv);
+
+
+            document.newComment.submit();
+
+        }
+
     </script>
     <!-- <link rel="stylesheet" type="text/css" href="../styles/blogViewer.css"> -->
 	<script type="text/javascript">
@@ -145,11 +173,13 @@ while($r=$res->fetch_assoc()){
         </nav>
 <!-------------------------------------------------------------------------------------------------------------------------------------->
 
+
+
 	<h1 id="blogTitle"><?php echo $title; ?></h1>
 	<div id="blogContent" >
 
 	</div>
-	<div class="detailBox">
+	<div class="detailBox" id="dbox">
     <div class="titleBox"><h4><b>Comments</b></h4></div>
 
 
@@ -166,15 +196,15 @@ while($r=$res->fetch_assoc()){
 ?>
 
 <div class="commentBox">
-        <form action="../db/saveComment.php" method="POST">
+        <form action="../db/saveComment.php" method="POST" name="newComment">
             <input value="<?php echo $path ?>" name="blogID" type="hidden">
-            <input type="text" class="form-control" placeholder="Add a comment" name="comm"/><br>
-            <input type="submit" value="Comment" style=" font-size: 15px; margin: auto;" class="btn greenify" />
+            <input type="text" class="form-control" placeholder="Add a comment" name="comm" id="comm"/><br>
+            <input onclick="makeComment()" value="Comment" style=" font-size: 15px; margin: auto;" class="btn greenify" />
         </form>
         
     </div>
         
-    </div> -->
+ </div> 
 </div>
 </body>
 </html>

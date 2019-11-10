@@ -263,11 +263,11 @@ while($r=$res->fetch_assoc()){
           <div class="card-header"><span style="font-weight: bold;" class="text-muted">124 
           likes</span>
 
-          <img src="../images/share.svg" class="icons" style="position: absolute; right:100px;" title="Share" >
-          <img src="../images/blogging.svg" class="icons" style="position: absolute; right:60px;" title="Comment" 
+          <img src="../images/share.svg" class="icons" style="position: absolute; right:150px;" title="Share" >
+          <img src="../images/blogging.svg" class="icons" style="position: absolute; right:100px;" title="Comment" 
           onclick="openBlog(this.id)" id="'.$postIDS[$i].'">
-          <img src="../images/like.svg" class="icons" id="like" style="position: absolute; right:18px;" onclick="liked(this)" title="Like" >
-          </div></div></div>';
+          <img src="../images/like.svg" class="icons" id="like" style="position: absolute; right:60px;" onclick="liked(this)" title="Like" >
+          ';
 
 
           if($saved==0)
