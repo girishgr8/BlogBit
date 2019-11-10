@@ -10,6 +10,97 @@ body {
   height: 100%;
 }
 
+
+.detailBox {
+    margin: auto;
+    width: 80%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /*border:1px solid #bbb;*/
+    /*margin:50px;*/
+}
+
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+}
+
+.title-editor
+{
+font-family: 'Roboto Condensed', sans-serif;
+text-align: center;
+text-align: center;
+background-color: #FEFFED;
+height: 70px;
+color: rgb(95, 89, 89);
+margin: 0 0 -29px 0;
+padding-top: 14px;
+border-radius: 10px 10px 0 0;
+font-size: 35px;
+}
+
+#image_preview{
+
+font-size: 30px;
+text-align: center;
+line-height: 180px;
+font-weight: bold;
+color: #C0C0C0;
+background-color: #FFFFFF;
+overflow: auto;
+}
+
+
+.titleBox {
+    background-color:#fdfdfd;
+    padding:10px;
+}
+.titleBox label{
+  color:white;
+  margin:0;
+  display:inline-block;
+}
+
+.commentBox {
+    padding: 10px;
+    padding:10px;
+    color: black;
+    background-color: white;
+    border-top:1px dotted #bbb;
+}
+.commentBox .form-group:first-child, .actionBox .form-group:first-child {
+    width:80%;
+}
+.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
+    width:18%;
+}
+.actionBox .form-group * {
+    width:100%;
+}
+.taskDescription {
+    margin-top:10px 0;
+}
+
+#blogTitle{
+  color: white;
+  margin-top: 80px;
+  margin-bottom: 20px;
+  margin-left: 150px;
+}
+
+#blogContent{ 
+  height: auto; 
+  margin: auto;
+  width: 80%;
+  color: white;
+  /*border: 3px solid #73AD21;*/
+  padding: 20px;
+  background-color: white;
+
+}
+
+
 .map{
 	width: 40%;
 	margin-left: 20vh;

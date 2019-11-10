@@ -7,6 +7,7 @@ $images=[];
 $disclaimers=[];
 $titles=[];
 $postIDS=[];
+// $blogIDs=[];
 $usernames=[];
 
 $sql="SELECT username,title,disclaimer from blog";
@@ -15,7 +16,10 @@ while($r=$res->fetch_assoc()){
   $images[]=$r['username'].'_'.$r['title'].'.png';
   $disclaimers[]=$r['disclaimer'];
   $titles[]=$r['title'];
-  $postIDS[]=$r['username'].'_'.$r['title'];  
+  // $blogIDs=$r['blogID'];
+  $postIDS[]=$r['username'].'_'.$r['title'];
+  // '_'.$r['blogID']  
+// arts[0].'_'.$parts[1]
   $usernames[]=$r['username'];   
 
 }
@@ -51,7 +55,6 @@ while($r=$res->fetch_assoc()){
   </script>
   <script> 
     function openBlog(postID){
-
 
       window.location.href="./blogViewer.php?path="+postID;
     }
@@ -190,7 +193,8 @@ while($r=$res->fetch_assoc()){
           <div class="card-header"><span style="font-weight: bold;" class="text-muted">124 
           likes</span>
           <img src="../images/share.svg" class="icons" style="position: absolute; right:100px;" title="Share" >
-          <img src="../images/blogging.svg" class="icons" style="position: absolute; right:60px;" title="Comment" >
+          <img src="../images/blogging.svg" class="icons" style="position: absolute; right:60px;" title="Comment" 
+          onclick="openBlog(this.id)" id="'.$postIDS[$i].'">
           <img src="../images/like.svg" class="icons" id="like" style="position: absolute; right:18px;" onclick="liked(this)" title="Like" >
           </div></div></div>';
         }
