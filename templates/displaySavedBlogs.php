@@ -1,7 +1,10 @@
 
 <?php
 session_start();
-include ('../config.php');
+include("../config/config.php");
+if(!isset($_SESSION['username'])){
+  header("Location: ../index.php");
+}
 
 $username = $_SESSION['username'];
 $querycheck ="SELECT savedBlogs FROM user WHERE username = '$username'";

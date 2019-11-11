@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../config.php");
+include("../config/config.php");
 
 $email=$_POST["newEmail"];
 $pass=$_POST["pass"];

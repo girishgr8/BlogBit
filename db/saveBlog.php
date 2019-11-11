@@ -1,6 +1,7 @@
 <?php
 session_start();
-include("../config.php");
+include("../config/config.php");
+
 $username= $_SESSION["username"];
 $blog=$_POST['blog'];
 $title=$_POST['title'];

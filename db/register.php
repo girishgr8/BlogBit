@@ -1,6 +1,7 @@
 <?php
 session_start();
-include("../config.php");
+include("../config/config.php");
+
 $firstname = $_POST['firstname'];
 $middlename = $_POST['middlename'];
 $lastname = $_POST['lastname'];
