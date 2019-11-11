@@ -1,7 +1,9 @@
 
 <?php
 session_start();
-include ('../config/db_connect.php');
+include ('../config.php');
+
+
 
 ?>
 <!DOCTYPE html>
@@ -11,14 +13,17 @@ include ('../config/db_connect.php');
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <meta name="google-signin-client_id" content="431755900850-hj63duh4igs0cmhig2tke2t6h0c0gk0g.apps.googleusercontent.com" />
-  <!--Including Editor API-->
-  <script src="../config/editorAPI/tinymce.min.js"></script>
+ <meta name="google-signin-client_id" id="gauth"/>
+  <script type="text/javascript">
+    var authKey = <?php echo json_encode($authKey);?>;
+    $("#gauth").attr("content", authKey);
+  </script>
   <script>
-
+var app_id = <?php echo json_encode($app_id);?>;
+var app_code = <?php echo json_encode($app_code);?>;
     function openEditor(){
-		window.location.href="./blogEditor.php";
-	}
+    window.location.href="./blogEditor.php";
+  }
     /*logout of both Google and normal session*/
     function logout() {
       var r = confirm("Do you wish to logout?");
@@ -33,13 +38,13 @@ include ('../config/db_connect.php');
    }
    var GoogleAuth;
    function onLoad() {
-		gapi.load('auth2', () => {
-			GoogleAuth = gapi.auth2.init();
-		});
+    gapi.load('auth2', () => {
+      GoogleAuth = gapi.auth2.init();
+    });
    }
   function liked(heart) {
    console.log('liked');
-   source=heart.src;	
+   source=heart.src;  
    if (source.slice(-8,-4) == "like") 
    {
     heart.src = "../images/liked.svg";
@@ -60,7 +65,7 @@ include ('../config/db_connect.php');
 </head>
 <body>
 
-  <nav class="navbar navbar-default  navbar-expand-lg fixed-top ">
+  <nav class="navbar navbar-default  navbar-expand-lg fixed-top " >
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="#"><span class="brand">WordFlow</span></a>
@@ -128,7 +133,7 @@ include ('../config/db_connect.php');
   </datalist>
 
 
-  <div id="wrapperCurrentLocation">
+  <div id="wrapperCurrentLocation" style="margin-top: 50px;">
     <div id="currentMap">   
       <div class="mapouter" id = "currentLocMap">
         <div class="gmap_canvas">
@@ -241,7 +246,7 @@ include ('../config/db_connect.php');
 
   function getSrc(src){
     var geocoderAPISrc = new HttpClient();
-    geocoderAPISrc.get('https://geocoder.api.here.com/6.2/geocode.json?app_id=zeI2BlhgRBZQiOrhtS1i&app_code=tS_8ziIKRg9jQkw_4lmezw&searchtext='+src, function(response) {
+    geocoderAPISrc.get('https://geocoder.api.here.com/6.2/geocode.json?app_id='+app_id+'&app_code='+app_code+'&searchtext='+src, function(response) {
         // do something with response
         let result = JSON.parse(response);
         var locations = result.Response.View[0].Result;
@@ -262,7 +267,7 @@ include ('../config/db_connect.php');
   function getDest(dest){
 
     var geocoderAPIDest = new HttpClient();
-    var pos = geocoderAPIDest.get('https://geocoder.api.here.com/6.2/geocode.json?app_id=zeI2BlhgRBZQiOrhtS1i&app_code=tS_8ziIKRg9jQkw_4lmezw&searchtext='+dest, function(response) {
+    var pos = geocoderAPIDest.get('https://geocoder.api.here.com/6.2/geocode.json?app_id='+app_id+'&app_code='+app_code+'&searchtext='+dest, function(response) {
         // do something with response
         let result = JSON.parse(response);
         var locations = result.Response.View[0].Result;
@@ -302,7 +307,7 @@ include ('../config/db_connect.php');
 
     var radius = 150;
     var reverseGeocoderAPISrc = new HttpClient();
-    reverseGeocoderAPISrc.get('https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?app_id=zeI2BlhgRBZQiOrhtS1i&app_code=tS_8ziIKRg9jQkw_4lmezw&prox='+newLat+','+newLon+','+radius+'&mode=retrieveAddresses&maxresults=1', function(response) {
+    reverseGeocoderAPISrc.get('https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?app_id='+app_id+'&app_code='+app_code+'&prox='+newLat+','+newLon+','+radius+'&mode=retrieveAddresses&maxresults=1', function(response) {
             // do something with response
             let result = JSON.parse(response);
             var location = result.Response.View[0].Result[0];
@@ -323,7 +328,7 @@ include ('../config/db_connect.php');
   }
 
   function showMap(){
-    var src= "http://image.maps.cit.api.here.com/mia/1.6/routing?app_id=zeI2BlhgRBZQiOrhtS1i&app_code=tS_8ziIKRg9jQkw_4lmezw&waypoint0="+latSrc+","+lngSrc+"&waypoint1="+latDest+","+lngDest+"&lc=1652B4&lw=6&t=0&ppi=320&w=900&h=630";
+    var src= "http://image.maps.cit.api.here.com/mia/1.6/routing?app_id="+app_id+"&app_code="+app_code+"&waypoint0="+latSrc+","+lngSrc+"&waypoint1="+latDest+","+lngDest+"&lc=1652B4&lw=6&t=0&ppi=320&w=900&h=630";
     document.getElementById("pic").src=src;
 
     
@@ -349,7 +354,7 @@ include ('../config/db_connect.php');
 
 
     var reverseGeocoderAPISrc = new HttpClient();
-    reverseGeocoderAPISrc.get('https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?app_id=zeI2BlhgRBZQiOrhtS1i&app_code=tS_8ziIKRg9jQkw_4lmezw&prox='+lat+','+lon+','+radius+'&mode=retrieveAddresses&maxresults=1', function(response) {
+    reverseGeocoderAPISrc.get('https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?app_id='+app_id+'&app_code='+app_code+'&prox='+lat+','+lon+','+radius+'&mode=retrieveAddresses&maxresults=1', function(response) {
         // do something with response
         let result = JSON.parse(response);
         var location = result.Response.View[0].Result[0];
@@ -408,8 +413,8 @@ function sendInviteMail () {
     $name = $_SESSION["name"];
     $username = $_SESSION["username"];
     $email=$_SESSION["email"];
-	  echo $name."\n".$username."\n".$email;
-	?>`;
+    echo $name."\n".$username."\n".$email;
+  ?>`;
 
   var name = str.split ('\n')[0];
   var user1 = str.split ('\n')[1];

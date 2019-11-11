@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ('../config/db_connect.php');
+include ('../config.php');
 
 ?>
 <!DOCTYPE html>
@@ -10,190 +10,205 @@ include ('../config/db_connect.php');
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <meta name="google-signin-client_id" content="431755900850-hj63duh4igs0cmhig2tke2t6h0c0gk0g.apps.googleusercontent.com" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <meta name="google-signin-client_id" id="gauth"/>
+  <script type="text/javascript">
+    var authKey = <?php echo json_encode($authKey);?>;
+    $("#gauth").attr("content", authKey);
+  </script> 
+  
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
   <!--Including Editor API-->
-  <script src="../config/editorAPI/tinymce.min.js"></script>
+  <script type="text/javascript">
+    var editorKey = <?php echo json_encode($editorKey);?>;
+    
+    $("#editorAPI").attr("src",editorKey);
+    document.write("<script type='text/javascript' referrerpolicy='origin' src='https://cdn.tiny.cloud/1/"+ editorKey + "/tinymce/5/tinymce.min.js'><\/scr" + "ipt>");
+  </script>
   <script>
     function openEditor(){
-    window.location.href="./blogEditor.php";
-  }
+      window.location.href="./blogEditor.php";
+    }
     /*logout of both Google and normal session*/
     function logout() {
-        var r = confirm("Do you wish to logout?");
-        if (r == true) {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(() => {
-            document.location.href = '../db/logout.php';
+      var r = confirm("Do you wish to logout?");
+      if (r == true) {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(() => {
+          document.location.href = '../db/logout.php';
         });
         auth2.disconnect();
         document.location.href = '../db/logout.php';
-        }
+      }
     }
-   
-   function onLoad() {
-    gapi.load('auth2', () => {
-      GoogleAuth = gapi.auth2.init();
-    });
-   }
+    
+    function onLoad() {
+      gapi.load('auth2', () => {
+        GoogleAuth = gapi.auth2.init();
+      });
+    }
 
     function liked(heart) {
-        console.log('liked');
-        source=heart.src; 
-        if (source.slice(-8,-4) == "like") {
-            heart.src = "../images/liked.svg";
-        }else {
-            heart.src = "../images/like.svg";
-        }
+      console.log('liked');
+      source=heart.src; 
+      if (source.slice(-8,-4) == "like") {
+        heart.src = "../images/liked.svg";
+      }else {
+        heart.src = "../images/like.svg";
+      }
     }
-    </script>
+  </script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css"> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../styles/dashboard.css"/>
-    </head>
-    <body>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../styles/dashboard.css"/>
+</head>
+<body>
 
-        <nav class="navbar navbar-default  navbar-expand-lg fixed-top ">
-        <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#"><span class="brand">WordFlow</span></a>
-        </div>
-        <div class="nav navbar-nav navbar-form">
-            <form action="" method="GET" class="form-inline"> 
-            <div class="row">
-                <div class="col-md-40">
-                <div class="input-group">
-                    <div class="input-group-btn">
-                    <button class="btn searchbtn" type="submit">
-                        <span class="glyphicon glyphicon-search invert"></span>
-                    </button>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Search WordFlow" id="searchbox"/>
+  <nav class="navbar navbar-default  navbar-expand-lg fixed-top ">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#"><span class="brand">WordFlow</span></a>
+      </div>
+      <div class="nav navbar-nav navbar-form">
+        <form action="" method="GET" class="form-inline"> 
+          <div class="row">
+            <div class="col-md-40">
+              <div class="input-group">
+                <div class="input-group-btn">
+                  <button class="btn searchbtn" type="submit">
+                    <span class="glyphicon glyphicon-search invert"></span>
+                  </button>
                 </div>
-                </div>
+                <input type="text" class="form-control" placeholder="Search WordFlow" id="searchbox"/>
+              </div>
             </div>
-            </form>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="./dashboard.php" class="nav-item nav-link" title="Home"><img src="../images/home.svg" class="icons invert"></a></li>
-            <li><a href="./messages.php" class="nav-item nav-link" title="Message"><img src="../images/msg.svg" class="icons invert"></a></li>
+          </div>
+        </form>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="./dashboard.php" class="nav-item nav-link" title="Home"><img src="../images/home.svg" class="icons invert"></a></li>
+        <li><a href="./messages.php" class="nav-item nav-link" title="Message"><img src="../images/msg.svg" class="icons invert"></a></li>
 
-            <li><a href="#" class="nav-item nav-link" title="Saved Posts"><img src="../images/save2.svg" class="icons invert"></a></li>
-            <li><a href="./meet.php" class="nav-item nav-link" title="Meet a friend"><img src="../images/map.svg" class="icons invert"></a></li>
-            <!-- <li><a href="#" class="nav-item nav-link" title="Liked Posts"><img src="../images/heart.svg" class="icons invert"></a></li> -->
+        <li><a href="#" class="nav-item nav-link" title="Saved Posts"><img src="../images/save2.svg" class="icons invert"></a></li>
+        <li><a href="./meet.php" class="nav-item nav-link" title="Meet a friend"><img src="../images/map.svg" class="icons invert"></a></li>
+        <!-- <li><a href="#" class="nav-item nav-link" title="Liked Posts"><img src="../images/heart.svg" class="icons invert"></a></li> -->
 
-            <li><a href="#" class="nav-item nav-link " data-toggle="dropdown" data-target=".userdrop" title="Your Profile"><img src="../images/user.svg" class="icons invert"></a>
-            <div class="dropdown userdrop">
-                <ul class="dropdown-menu">
-                    <li class="dropdown-header">Account</li>
-                    <li><a href="#" onclick="logout()">Log Out</a></li>
-                    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-                    <li><a href="./settings.php">Settings</a></li>
-                    <li><a href="#">Help</a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header">WordFlow</li>
-                    <li><a href="#">Posts</a></li>
-                    <li><a href="#">Likes</a></li>
-                    <li><a href="#">Edit appearance</a></li>
-                </ul>
-            </div>
-            </li>
-            <button class="btn navbar-btn item writebtn3" title="Create" onclick="openEditor()"> &nbsp;<img src="../images/pencil.svg" class="icons">&nbsp;</button>
+        <li><a href="#" class="nav-item nav-link " data-toggle="dropdown" data-target=".userdrop" title="Your Profile"><img src="../images/user.svg" class="icons invert"></a>
+          <div class="dropdown userdrop">
+            <ul class="dropdown-menu">
+              <li class="dropdown-header">Account</li>
+              <li><a href="#" onclick="logout()">Log Out</a></li>
+              <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+              <li><a href="./settings.php">Settings</a></li>
+              <li><a href="#">Help</a></li>
+              <li class="divider"></li>
+              <li class="dropdown-header">WordFlow</li>
+              <li><a href="#">Posts</a></li>
+              <li><a href="#">Likes</a></li>
+              <li><a href="#">Edit appearance</a></li>
             </ul>
-        </div>
-        </nav>
+          </div>
+        </li>
+        <button class="btn navbar-btn item writebtn3" title="Create" onclick="openEditor()"> &nbsp;<img src="../images/pencil.svg" class="icons">&nbsp;</button>
+      </ul>
+    </div>
+  </nav>
 
- <!-- <link rel="stylesheet" type="text/css" href="../styles/blogEditorStyle.css"> -->
-<!-------------------------------------------------------------------------------------------------------------------------------->
- <script>
+  <!-- <link rel="stylesheet" type="text/css" href="../styles/blogEditorStyle.css"> -->
+  <!-------------------------------------------------------------------------------------------------------------------------------->
+  <script>
 
-  /*Instantiating the EditorAPI*/
-  tinymce.init({
+    /*Instantiating the EditorAPI*/
+    tinymce.init({
 
-    selector: '#mytextarea', /*specify textarea tag*/
+      selector: '#mytextarea', /*specify textarea tag*/
 
-    plugins: "lists,advlist,emoticons,image,link,searchreplace,fullscreen,save,insertdatetime,table,print,wordcount" , 
-    toolbar: 'undo redo  | bold italic| alignleft aligncenter alignright alignjustify|outdent indent| bullist numlist| link image table insertdatetime emoticons | searchreplace wordcount | fullscreen save print |' , 
+      plugins: "lists,advlist,emoticons,image,link,searchreplace,fullscreen,save,insertdatetime,table,print,wordcount" , 
+      toolbar: 'undo redo  | bold italic| alignleft aligncenter alignright alignjustify|outdent indent| bullist numlist| link image table insertdatetime emoticons | searchreplace wordcount | fullscreen save print |' , 
 
 
-    file_picker_types: 'image',
-    /* and here's our custom image picker*/
-    file_picker_callback: function (cb, value, meta) {
-      var input = document.createElement('input');
-      input.setAttribute('type', 'file');
-      input.setAttribute('accept', 'image/*');
-      input.setAttribute('name', 'blog');
-      input.onchange = function () {
-        var file = this.files[0];
+      file_picker_types: 'image',
+      /* and here's our custom image picker*/
+      file_picker_callback: function (cb, value, meta) {
+        var input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.setAttribute('name', 'blog');
+        input.onchange = function () {
+          var file = this.files[0];
 
-        var reader = new FileReader();
-        reader.onload = function () {
+          var reader = new FileReader();
+          reader.onload = function () {
 
-          var id = 'blobid' + (new Date()).getTime();
-          var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-          var base64 = reader.result.split(',')[1];
-          var blobInfo = blobCache.create(id, file, base64);
-          blobCache.add(blobInfo);
+            var id = 'blobid' + (new Date()).getTime();
+            var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+            var base64 = reader.result.split(',')[1];
+            var blobInfo = blobCache.create(id, file, base64);
+            blobCache.add(blobInfo);
 
-          /* call the callback and populate the Title field with the file name */
-          cb(blobInfo.blobUri(), { title: file.name });
+            /* call the callback and populate the Title field with the file name */
+            cb(blobInfo.blobUri(), { title: file.name });
+          };
+          reader.readAsDataURL(file);
         };
-        reader.readAsDataURL(file);
-      };
 
-      input.click();
-    },
-    save_onsavecallback: function () { 
-      console.log('Saved');
-      var title = document.getElementById("title").value;
-      
-      if(title!=null){
-        alert(title);
-        $.post(
-          '../db/saveBlog.php',
-          {
-            save:1,
-            blog:tinyMCE.activeEditor.getContent(),
-            title:title
-          },
+        input.click();
+      },
+      save_onsavecallback: function () { 
+        console.log('Saved');
+        var title = document.getElementById("title").value;
+        
+        if(title!=null){
+          alert(title);
+          $.post(
+            '../db/saveBlog.php',
+            {
+              save:1,
+              blog:tinyMCE.activeEditor.getContent(),
+              title:title
+            },
 
-          function(result){
-            alert("Blog Saved");
+            function(result){
+              alert("Blog Saved");
 
-          }
+            }
 
-          );
+            );
+        }
+        else{
+          alert("Please enter a valid title for your blog");
+        }
       }
-      else{
-        alert("Please enter a valid title for your blog");
-      }
+
+
+    });
+
+  </script>
+
+  <!--Hiding the watermarks of API-->
+  <style>
+    hr{
+      border: 50px solid #022012;
+    }
+    body{
+      text-align: center;
+      color: white;
+    }
+    .tox .tox-statusbar__path {
+      display: none;
     }
 
+    a {
+      display: none;
+    }
 
-  });
-
-</script>
-
-<!--Hiding the watermarks of API-->
-<style>
-  hr{
-    border: 50px solid #022012;
-  }
-  body{
-    text-align: center;
-    color: white;
-  }
-  .tox .tox-statusbar__path {
-    display: none;
-  }
-
-  a {
-    display: none;
-  }
-
-</style>
+  </style>
 
 </head>
 

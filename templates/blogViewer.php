@@ -1,23 +1,24 @@
 <?php
 session_start();
-include ('../config/db_connect.php');
-$path = $_GET['path'];
-$parts = explode('_', $path);
+include ('../config.php');
+date_default_timezone_set('Asia/Kolkata');
+$p = $_GET['path'];
+$parts = explode('_', $p);
 $userNamee = $_SESSION['username'];
 $title=$parts[1];
 // $blogID = $parts[2];
 // $blogID = $_GET['blogID'];
-echo $path;
+
 
 $comment=[];
 $userName=[];
 $timestamp=[];
-$sql="SELECT username,comment,date from comments where blogID = '".$path."'";
+$sql="SELECT username,comment,`date` from comments where blogID = '".$p."'";
 $res=$conn->query($sql);
 while($r=$res->fetch_assoc()){
   $userName[]=$r['username'];
   $comment[]=$r['comment'];
-  $timestamp=($r['date']);
+  $timestamp[]=($r['date']);
   // echo $r['username'];
 }
 
@@ -29,11 +30,14 @@ while($r=$res->fetch_assoc()){
 <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- <link rel="stylesheet" type="text/css" href="../styles/blogViewer.css"> -->
 <script type="text/javascript">
-	var path=<?php echo json_encode($path);?>;
-    console.log(path);
-	var path2= path.replace(' ', '%20');
+    var path=<?php echo json_encode($path);?>;
+	var p=<?php echo json_encode($p);?>;
+    
+	var pathNew= p.replace(' ', '%20');
+    console.log(pathNew);
 	$(function(){
-		$("#blogContent").load("../Blogs/"+path2+".html"); 
+        console.log(path+"Blogs/"+pathNew+".html");
+		$("#blogContent").load(path+"Blogs/"+pathNew+".html"); 
 	});
 </script>
 
@@ -43,9 +47,12 @@ while($r=$res->fetch_assoc()){
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <meta name="google-signin-client_id" content="431755900850-hj63duh4igs0cmhig2tke2t6h0c0gk0g.apps.googleusercontent.com" />
-  <!--Including Editor API-->
-  <script src="../config/editorAPI/tinymce.min.js"></script>
+  <meta name="google-signin-client_id" id="gauth"/>
+  <script type="text/javascript">
+    var authKey = <?php echo json_encode($authKey);?>;
+    $("#gauth").attr("content", authKey);
+  </script>
+  
   <script>
     function openEditor(){
 		window.location.href="./blogEditor.php";
@@ -86,15 +93,15 @@ while($r=$res->fetch_assoc()){
         //     echo '</div>';
         // }
             var comment = document.getElementById('comm').value;
-            var user = <? php echo $userNamee ?>;
-            var box = document.getElementById('dbox');
+            var user = <?php  echo json_encode($userNamee ) ?>;
+            var box = document.getElementById('currentComment');
             var iDiv = document.createElement('div');
             iDiv.className = "commentBox";
             var h5 = document.createElement('h5');
             var a = document.createElement('p');
             a.className = 'taskDescription';
             user = user.bold();
-            h5.innerHTML = user;
+            h5.innerHTML = user+'<span class="date sub-text">&nbsp;·&nbsp;Just Now</span>';
             a.innerHTML = comment;
             iDiv.appendChild(h5);
             iDiv.appendChild(a);
@@ -102,18 +109,13 @@ while($r=$res->fetch_assoc()){
 
 
             document.newComment.submit();
+            $('#comm').val('');
 
         }
 
     </script>
     <!-- <link rel="stylesheet" type="text/css" href="../styles/blogViewer.css"> -->
-	<script type="text/javascript">
-		var path=<?php echo json_encode($path);?>;
-		var path2= path.replace(' ', '%20');
-		$(function(){
-			$("#blogContent").load("../Blogs/"+path2+".html"); 
-		});
-	</script>
+	
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -180,7 +182,9 @@ while($r=$res->fetch_assoc()){
 
 	</div>
 	<div class="detailBox" id="dbox">
+        
     <div class="titleBox"><h4><b>Comments</b></h4></div>
+   
 
 
 <?php
@@ -188,18 +192,19 @@ while($r=$res->fetch_assoc()){
 
         for($i=0;$i<count($userName);$i++){
             echo '<div class="commentBox">';
-            echo '<h5><b>'.$userName[$i].'</b><span class="date sub-text">&nbsp;·&nbsp;'.$timestamp[$i].'</span></h5>';
+            echo '<h5><b>'.$userName[$i].'</b><span class="date sub-text">&nbsp;·&nbsp;'.date("Y-m-d H:i:s",strtotime($timestamp[$i])).'</span></h5>';
             echo '<p class="taskDescription">'.$comment[$i].'</p>';
             echo '</div>';
         }
 
 ?>
+ <div id="currentComment"></div>
 
 <div class="commentBox">
         <form action="../db/saveComment.php" method="POST" name="newComment">
-            <input value="<?php echo $path ?>" name="blogID" type="hidden">
-            <input type="text" class="form-control" placeholder="Add a comment" name="comm" id="comm"/><br>
-            <input onclick="makeComment()" value="Comment" style=" font-size: 15px; margin: auto;" class="btn greenify" />
+            <input value="<?php echo $p; ?>" name="blogID" type="hidden">
+            <input type="text" class="form-control" style="text-align: left;" placeholder="Add a comment" name="comm" id="comm"/><br>
+            <input type = "button"onclick="makeComment()" value="Comment" style=" font-size: 15px; margin: auto;" class="btn greenify" />
         </form>
         
     </div>

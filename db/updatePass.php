@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../config/db_connect.php");
+include("../config.php");
 
 $pass=$_POST["pass3"];
 $new=$_POST["newPass"];

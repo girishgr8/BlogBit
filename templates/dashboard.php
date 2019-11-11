@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-include ('../config/db_connect.php');
+include ('../config.php');
 $username = $_SESSION['username'];
 $querycheck ="SELECT savedBlogs FROM user WHERE username = '$username'";
 $countrows = ($conn->query($querycheck))->num_rows;
@@ -12,6 +12,14 @@ while($r=$res->fetch_assoc()){
 
 $parts = explode(',', $temp);
 
+$querycheck ="SELECT likedBlogs FROM user WHERE username = '$username'";
+$countrows = ($conn->query($querycheck))->num_rows;
+$res=$conn->query($querycheck);
+while($r=$res->fetch_assoc()){
+  $liked_temp = $r['likedBlogs'];
+}
+$liked_parts = explode(',',$liked_temp);
+
 
 
 $images=[];
@@ -20,8 +28,9 @@ $titles=[];
 $postIDS=[];
 // $blogIDs=[];
 $usernames=[];
+$likes = [];
 
-$sql="SELECT username,title,disclaimer from blog";
+$sql="SELECT username,title,disclaimer,likes from blog";
 $res=$conn->query($sql);
 while($r=$res->fetch_assoc()){
   $images[]=$r['username'].'_'.$r['title'].'.png';
@@ -31,7 +40,8 @@ while($r=$res->fetch_assoc()){
   $postIDS[]=$r['username'].'_'.$r['title'];
   // '_'.$r['blogID']  
 // arts[0].'_'.$parts[1]
-  $usernames[]=$r['username'];   
+  $usernames[]=$r['username'];  
+  $likes[] = $r['likes']; 
 
 }
 
@@ -43,12 +53,17 @@ while($r=$res->fetch_assoc()){
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <meta name="google-signin-client_id" content="431755900850-hj63duh4igs0cmhig2tke2t6h0c0gk0g.apps.googleusercontent.com" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <meta name="google-signin-client_id" id="gauth"/>
+  <script type="text/javascript">
+    var authKey = <?php echo json_encode($authKey);?>;
+    $("#gauth").attr("content", authKey);
+  </script>
   <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <!--Including Editor API-->
-  <script src="../config/editorAPI/tinymce.min.js"></script>
+
   
   <script>
+    var path=<?php echo json_encode($path);?>;
     function allowDrop(ev) {
       ev.preventDefault();
     }
@@ -75,7 +90,7 @@ while($r=$res->fetch_assoc()){
       source=post.src; 
 
       if(source.slice(-12,-4)=="saveBlog"){
-        
+
         $.post(
           '../db/editSavedBlog.php',
           {
@@ -96,7 +111,7 @@ while($r=$res->fetch_assoc()){
       else 
       {
 
-       
+
         $.post(
           '../db/editSavedBlog.php',
           {
@@ -113,7 +128,50 @@ while($r=$res->fetch_assoc()){
         post.src = "../images/saveBlog.png";
       }
     }
-
+    function likedBlog(post,likes){
+      postID=post.id;      
+      res = postID.split(":");  
+      console.log(res[1].split('_')[0]);
+      source=post.src;
+      textID = "text:"+res[1];
+      countID = "count:"+res[1];
+      if(source.slice(-8,-4)== "like"){
+        $.post(
+          '../db/likedBlog.php',{
+            like:1,
+            postID:res[1],
+            creator: res[1].split('_')[0],
+            title: res[1].split('_')[1]
+          },
+          function(result){
+            console.log(result);
+            alert("Blog Liked..! Keep reading !");
+          }
+          );
+        post.src = "../images/liked.svg";
+        
+        document.getElementById(countID).innerHTML = (likes+1)+" likes";
+       
+      }
+      else {
+        
+        $.post(
+          '../db/likedBlog.php',{
+            unlike:1,
+            postID:res[1],
+            creator: res[1].split('_')[0],
+             title: res[1].split('_')[1]
+          },
+          function(result){
+            alert("Blog Unliked ! :-(");
+          }
+          );
+        post.src = "../images/like.svg";
+    
+        document.getElementById(countID).innerHTML = (likes)+" likes";
+        
+      }
+    }
 
   </script>
   <script>
@@ -184,17 +242,17 @@ while($r=$res->fetch_assoc()){
       <ul class="nav navbar-nav navbar-right">
         <li><a href="./dashboard.php" class="nav-item nav-link" title="Home"><img src="../images/home.svg" class="icons highlight-icon"></a></li>
 
+        <li><a href="./messages.php" class="nav-item nav-link" title="Message"><img src="../images/msg.svg" class="icons invert"></a></li>
 
         <li><a href="./displaySavedBlogs.php" class="nav-item nav-link" title="Saved Posts"><img src="../images/save2.svg" class="icons invert"></a></li>
 
-        <li><a href="./messages.php" class="nav-item nav-link" title="Message"><img src="../images/msg.svg" class="icons invert"></a></li>
-    
+
         
 
-       
+
         <li><a href="./meet.php" class="nav-item nav-link" title="Meet a friend"><img src="../images/map.svg" class="icons invert"></a></li>
         <!-- <li><a href="#" class="nav-item nav-link" title="Liked Posts"><img src="../images/heart.svg" class="icons invert"></a></li> --> 
-               
+
         <li><a href="#" class="nav-item nav-link " data-toggle="dropdown" data-target=".userdrop" title="Your Profile"><img src="../images/user.svg" class="icons invert"></a>
           <div class="dropdown userdrop">
             <ul class="dropdown-menu">
@@ -242,9 +300,16 @@ while($r=$res->fetch_assoc()){
 
         for($i=0;$i<count($postIDS);$i++){
           $saved=0;
+          $liked=0;
           for ($x = 0; $x < count($parts); $x++) {
             if($parts[$x]==$postIDS[$i]){
               $saved=1;
+              break;
+            }
+          }
+          for ($x = 0; $x < count($liked_parts); $x++) {
+            if($liked_parts[$x]==$postIDS[$i]){
+              $liked=1;
               break;
             }
           }
@@ -254,20 +319,26 @@ while($r=$res->fetch_assoc()){
           echo '<span>'.$usernames[$i].'</span>&nbsp; &nbsp;';
           echo '<img src="../images/follow.svg" class="icons" title="follow" style="margin-bottom: 3px;">
           </div><div class="card-image">';
-          echo '<img src="../blogForegroundImages/'.$images[$i].'" alt="." style="width:100%">';
+          echo '<img src="'.$path.'blogForegroundImages/'.$images[$i].'" alt="." style="width:100%">';
           echo '<button class="card-btn btn"><img src="../images/rightarrow.svg" class="view-icon" 
           onclick="openBlog(this.id)" id="'.$postIDS[$i].'"></button></div><div class="card-body">';
           echo '<h1 class="card-title">'.$titles[$i].'</h1>';
           echo '<p class="card-text">'.$disclaimers[$i].'</p>';
           echo '<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p></div>
-          <div class="card-header"><span style="font-weight: bold;" class="text-muted">124 
-          likes</span>
+          <div class="card-header"><span style="font-weight: bold;"  class="text-muted" id="count:'.$postIDS[$i].'">'.$likes[$i].' likes</span>
 
           <img src="../images/share.svg" class="icons" style="position: absolute; right:150px;" title="Share" >
           <img src="../images/blogging.svg" class="icons" style="position: absolute; right:100px;" title="Comment" 
-          onclick="openBlog(this.id)" id="'.$postIDS[$i].'">
-          <img src="../images/like.svg" class="icons" id="like" style="position: absolute; right:60px;" onclick="liked(this)" title="Like" >
-          ';
+          onclick="openBlog(this.id)" id="'.$postIDS[$i].'">';
+          if($liked==0)
+            echo '<img src="../images/like.svg" class="icons" id="like:'.$postIDS[$i].'" style="position: absolute; right:60px;" onclick="likedBlog(this,'.$likes[$i].')" title="Like" >';
+            
+          
+
+          else
+            echo '<img src="../images/liked.svg" class="icons" id="like:'.$postIDS[$i].'" style="position: absolute; right:60px;" onclick="likedBlog(this,'.$likes[$i].')" title="Liked !" >';
+            
+          
 
 
           if($saved==0)
