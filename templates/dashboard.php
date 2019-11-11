@@ -228,7 +228,7 @@ while($r=$res->fetch_assoc()){
         <a class="navbar-brand" href="#"><span class="brand">WordFlow</span></a>
       </div>
       <div class="nav navbar-nav navbar-form">
-        <form action="" method="GET" class="form-inline"> 
+        <form action="../templates/search.php" method="POST" class="form-inline"> 
           <div class="row">
             <div class="col-md-40">
               <div class="input-group">
@@ -237,7 +237,7 @@ while($r=$res->fetch_assoc()){
                     <span class="glyphicon glyphicon-search invert"></span>
                   </button>
                 </div ondrop="drop(event)" ondragover="allowDrop(event)" id="div1">
-                <input   type="text" class="form-control" placeholder="Search WordFlow" id="searchbox"/>
+                <input   type="text" class="form-control" placeholder="Search WordFlow" id="searchbox" name='searchquery'/>
               </div>
             </div>
           </div>
@@ -364,10 +364,10 @@ while($r=$res->fetch_assoc()){
         <div class="wrapper"><ul class="mat_list cardi">
 
          <h5 style="font-weight: bold;">Recommendations</h5>
-         <li><p draggable="true" ondragstart="drag(event)">Girish Thatte</p></li>
-         <li><p draggable="true" ondragstart="drag(event)">Amisha Waghela</p></li>
-         <li><p draggable="true" ondragstart="drag(event)">Rahul Mistry</p></li>
-         <li><p draggable="true" ondragstart="drag(event)">Sheldon Cooper</p></li>
+         <li><p draggable="true" ondragstart="drag(event)">girish123</p></li>
+         <li><p draggable="true" ondragstart="drag(event)">amishaaa</p></li>
+         <li><p draggable="true" ondragstart="drag(event)">rahul</p></li>
+         <li><p draggable="true" ondragstart="drag(event)">gayatree</p></li>
        </ul>
      </div>
 

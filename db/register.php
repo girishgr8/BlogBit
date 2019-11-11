@@ -53,6 +53,8 @@ $pincode = $_POST['pincode'];
    
         $_SESSION["name"]=$firstname." ".$lastname;
         $_SESSION["username"]=$username;
+        $_SESSION["email"]=$email;
+        $_SESSION["password"]=$password;
          header("Location: ../templates/dashboard.php");
 
 
