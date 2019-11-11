@@ -5,8 +5,8 @@ Benefits:
 * Sharing of like-ideas through a proper channel
 * Easily operable interface
 * Platform for creators to show their work, take in suggestions and improvise
-
-Features:
+-----------------------------------------------
+## Features
 - [x] Blog Editor (WYSIWYG editor)
 - [x] Meetup Module (Locate mid-point between locations of two users)
 
@@ -41,7 +41,7 @@ Features:
 ### Database Setup
 
 * Create a schema in MySQL Workbench and replace `dbname` with your schema name and other credentials namely `servername`, `port`, `username` and `password` in [configuration](https://github.com/girishgr8/BlogBit/blob/master/config.php) file
-* All the required tables are auto-created by the DLL statements in config file
+* All the required tables are auto-created by the DDL statements in config file
 
 
 ### Configurations
@@ -95,8 +95,9 @@ To customise it further, build using [Angular Custom Element Folder](https://git
 
 ## Contributors
 * [Gayatri Srinivasan](https://github.com/gayatri-01)
-* [Girish Thatte](https://github.com/girishgr8)
 * [Amisha Waghela](https://github.com/amisha-w)
+* [Girish Thatte](https://github.com/girishgr8)
+
 
 -----------------------------------------------
 
