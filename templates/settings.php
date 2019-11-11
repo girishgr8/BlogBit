@@ -134,6 +134,7 @@ if(!isset($_SESSION['username'])){
                       $country=$row["country"];
                       $street=$row["street"];
                       $pin=$row["pincode"];
+
                 }
                 $addr = $street.", ".$city.", ".$pin." \r\n, ".$state.", ".$country;
               }

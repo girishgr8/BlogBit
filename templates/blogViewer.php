@@ -181,7 +181,7 @@ while($r=$res->fetch_assoc()){
 
 
 	<h1 id="blogTitle"><?php echo $title; ?></h1>
-	<div id="blogContent" >
+	<div id="blogContent" style="color: black;">
 
 	</div>
 	<div class="detailBox" id="dbox">
