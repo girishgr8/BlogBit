@@ -163,6 +163,7 @@ include ('../config.php');
       save_onsavecallback: function () { 
         console.log('Saved');
         var title = document.getElementById("title").value;
+        alert(tinyMCE.activeEditor.getContent());
         
         if(title!=null){
           alert(title);
@@ -215,7 +216,7 @@ include ('../config.php');
 <body>
 
 
-  <input placeholder="Enter your blog title" id="title" style="height: 50px; width: 90%; font-size: 45px; padding: 10px;color: black; margin-top: 80px !important;">
+  <input placeholder="Enter your blog title" id="title" style="height: 50px; width: 90%; font-size: 45px; padding: 10px;color: black; margin-top: 80px !important;"/>
   <br>
   <!-- <hr> -->
   <br>
