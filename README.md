@@ -37,7 +37,7 @@ Benefits:
 
 ### Configurations
 
-* Edit the [configuration](https://github.com/girishgr8/BlogBit/blob/master/config/.php) file
+* Edit the [configuration](https://github.com/girishgr8/BlogBit/blob/master/config.php) file
 * Replace `authKey` with 
 * Replace the `app_code`, `app_id` and `editorKey` with the keys you have generated from above instructions of API integrations
 * Create folders `blogForegroundImages` and `Blogs` in your local system
