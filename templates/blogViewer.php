@@ -1,6 +1,9 @@
 <?php
 session_start();
-include ('../config.php');
+include("../config/config.php");
+if(!isset($_SESSION['username'])){
+  header("Location: ../index.php");
+}
 date_default_timezone_set('Asia/Kolkata');
 $p = $_GET['path'];
 $parts = explode('_', $p);

@@ -1,5 +1,5 @@
 <?php
-include("../config.php");
+include("../config/config.php");
 require '../phpmailer/PHPMailerAutoload.php';
 require_once('../phpmailer/class.phpmailer.php');
 include("../phpmailer/class.smtp.php");
