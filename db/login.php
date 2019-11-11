@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../config/db_connect.php");
+include("../config.php");
 //login error status set to 0 initially
 $_SESSION["loginFail"]=0;
 //config inclusion

@@ -1,6 +1,7 @@
 <?php
 session_start();
-include("../config/db_connect.php");
+include("../config.php");
+date_default_timezone_set('Asia/Kolkata');
 $username= $_SESSION["username"];
 echo $username;
 $blogID = $_POST['blogID'];

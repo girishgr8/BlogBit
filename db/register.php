@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../config/db_connect.php");
+include("../config.php");
 $firstname = $_POST['firstname'];
 $middlename = $_POST['middlename'];
 $lastname = $_POST['lastname'];

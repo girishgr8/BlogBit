@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../config/db_connect.php");
+include("../config.php");
 $username= $_SESSION["username"];
 $title=$_POST['title'];
 //$title="kjbkjb";
@@ -24,7 +24,7 @@ if(isset($_FILES["file"]["type"]))
 
 
 $sourcePath = $_FILES['file']['tmp_name']; // Storing source path of the file in a variable
-$targetPath = "../blogForegroundImages/".$filename; // Target path where file is to be stored
+$targetPath = $path."blogForegroundImages/".$filename; // Target path where file is to be stored
 move_uploaded_file($sourcePath,$targetPath) ; // Moving Uploaded file
 
 

@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-include ('../config/db_connect.php');
+include ('../config.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,9 +10,11 @@ include ('../config/db_connect.php');
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="431755900850-hj63duh4igs0cmhig2tke2t6h0c0gk0g.apps.googleusercontent.com" />
-    <!--Including Editor API-->
-    <script src="../config/editorAPI/tinymce.min.js"></script>
+<meta name="google-signin-client_id" id="gauth"/>
+  <script type="text/javascript">
+    var authKey = <?php echo json_encode($authKey);?>;
+    $("#gauth").attr("content", authKey);
+  </script>
     <script>
       function openEditor(){
     window.location.href="./blogEditor.php";
