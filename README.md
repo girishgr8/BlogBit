@@ -1,4 +1,4 @@
-# <p style='color:green'>Wordflow</p>
+# Wordflow
 
 “Wordflow”, aims to bring the content creators together and allow them to share their insights with their own community and improvise themselves<br>
 Benefits:
@@ -6,13 +6,17 @@ Benefits:
 * Easily operable interface
 * Platform for creators to show their work, take in suggestions and improvise
 
+Features:
+- [x] Blog Editor (WYSIWYG editor)
+- [x] Meetup Module (Locate mid-point between locations of two users)
 
-<hr>
 
-## <p style='color:green'>Demo</p>
+-----------------------------------------------
 
+## Demo
+-----------------------------------------------
 
-## <p style='color:green'>Getting Started</p>
+## Getting Started
 
 
 
@@ -43,9 +47,9 @@ Benefits:
 * Create folders `blogForegroundImages` and `Blogs` in your local system
 * Replace the `path` with the path for your folders created above
 
+-----------------------------------------------
 
-
-## <p style='color:green'>Further Customisations</p>
+## Further Customisations
 The contact-form module is generated using Angular Framework<br>
 To customise it further, build using [Angular Custom Element Folder](https://github.com/girishgr8/BlogBit/tree/master/angular-custom-element)
 
@@ -61,26 +65,41 @@ To customise it further, build using [Angular Custom Element Folder](https://git
 
 * To build artifacts on the go, execute `npm run build && npm run package`
 
+-----------------------------------------------
 
 
-
-## <p style='color:green'>Built With</p>
+## Built With
 
 * [Angular](https://github.com/angular/angular-cli) - Angular CLI version 8.2.0 
 * [TinyMCE](https://www.tiny.cloud/) - The Editor API
 * [HEREMaps](https://developer.here.com/c/mapAPIs?cid=Other-Google-MM-T4-Dev-Brand-E&utm_source=Google&utm_medium=ppc&utm_campaign=Dev_PaidSearch_DevPortal_AlwaysOn&gclid=CjwKCAiAh5_uBRA5EiwASW3IaplFdLkFaSmTyjhYPlNGVZLHpIdJ8wmXqqaPy1JkK6OucFfYFrWLwhoC6F4QAvD_BwE&gclsrc=aw.ds) - The MAPs API
 
+-----------------------------------------------
+## Future Enhancements
 
+- [ ] Add 'Contests' module
+- [ ] Build Admin Dashboard
 
-## <p style='color:green'> Contributors </p>
+-----------------------------------------------
 
-* Gayatri Srinivasan
-* Girish Thatte
-* Amisha Waghela
+## Contributions
 
-## <p style='color:green'> License </p>
+ We're are open to `enhancements` & `bug-fixes`
+
+ ----------------------------------------------- 
+
+## Contributors
+* [Gayatri Srinivasan](https://github.com/gayatri-01)
+* [Girish Thatte](https://github.com/girishgr8)
+* [Amisha Waghela](https://github.com/amisha-w)
+
+-----------------------------------------------
+
+## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+-----------------------------------------------
 
 
 
