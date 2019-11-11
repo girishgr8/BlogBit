@@ -14,6 +14,11 @@ Features:
 -----------------------------------------------
 
 ## Demo
+
+![Alt Text](https://github.com/girishgr8/BlogBit/blob/master/gifs/dashboard.gif)
+![Alt Text](https://github.com/girishgr8/BlogBit/blob/master/gifs/meetup.gif)
+![Alt Text](https://github.com/girishgr8/BlogBit/blob/master/gifs/blogEditor.gif)
+
 -----------------------------------------------
 
 ## Getting Started
