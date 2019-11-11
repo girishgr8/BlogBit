@@ -55,8 +55,9 @@ while($r=$res->fetch_assoc()){
   <title>WordFlow</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  
   <meta name="google-signin-client_id" id="gauth"/>
   <script type="text/javascript">
     var authKey = <?php echo json_encode($authKey);?>;
