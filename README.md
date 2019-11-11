@@ -40,13 +40,13 @@ Benefits:
 
 ### Database Setup
 
-* Create a schema in MySQL Workbench and replace `dbname` with your schema name and other credentials namely `servername`, `port`, `username` and `password` in [configuration](https://github.com/girishgr8/BlogBit/blob/master/config.php) file
+* Create a schema in MySQL Workbench and replace `dbname` with your schema name and other credentials namely `servername`, `port`, `username` and `password` in [configuration](https://github.com/girishgr8/BlogBit/blob/master/config/config.php) file
 * All the required tables are auto-created by the DDL statements in config file
 
 
 ### Configurations
 
-* Edit the [configuration](https://github.com/girishgr8/BlogBit/blob/master/config/.php) file
+* Edit the [configuration](https://github.com/girishgr8/BlogBit/blob/master/config/config.php) file
 * Replace `authKey` with 
 * Replace the `app_code`, `app_id` and `editorKey` with the keys you have generated from above instructions of API integrations
 * Create folders `blogForegroundImages` and `Blogs` in your local system
