@@ -1,4 +1,4 @@
-# Wordflow
+# <p style='color:green'>Wordflow</p>
 
 “Wordflow”, aims to bring the content creators together and allow them to share their insights with their own community and improvise themselves<br>
 Benefits:
@@ -9,10 +9,10 @@ Benefits:
 
 <hr>
 
-## Demo
+## <p style='color:green'>Demo</p>
 
 
-## Getting Started
+## <p style='color:green'>Getting Started</p>
 
 
 
@@ -37,7 +37,7 @@ Benefits:
 
 ### Configurations
 
-* Edit the [configuration](https://github.com/girishgr8/BlogBit/blob/master/config.php) file
+* Edit the [configuration](https://github.com/girishgr8/BlogBit/blob/master/config/.php) file
 * Replace `authKey` with 
 * Replace the `app_code`, `app_id` and `editorKey` with the keys you have generated from above instructions of API integrations
 * Create folders `blogForegroundImages` and `Blogs` in your local system
@@ -45,7 +45,7 @@ Benefits:
 
 
 
-## Further Customisations
+## <p style='color:green'>Further Customisations</p>
 The contact-form module is generated using Angular Framework<br>
 To customise it further, build using [Angular Custom Element Folder](https://github.com/girishgr8/BlogBit/tree/master/angular-custom-element)
 
@@ -64,7 +64,7 @@ To customise it further, build using [Angular Custom Element Folder](https://git
 
 
 
-## Built With
+## <p style='color:green'>Built With</p>
 
 * [Angular](https://github.com/angular/angular-cli) - Angular CLI version 8.2.0 
 * [TinyMCE](https://www.tiny.cloud/) - The Editor API
@@ -72,15 +72,17 @@ To customise it further, build using [Angular Custom Element Folder](https://git
 
 
 
-## Contributors
+## <p style='color:green'> Contributors </p>
 
 * Gayatri Srinivasan
 * Girish Thatte
 * Amisha Waghela
 
-## License
+## <p style='color:green'> License </p>
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+
 
 
 
